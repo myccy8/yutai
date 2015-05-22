@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yutai", "yutai\yutai.csproj", "{E27C2C36-4A97-428F-B6A0-C40E2DD5BB29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yutai", "yutai\Yutai.csproj", "{E27C2C36-4A97-428F-B6A0-C40E2DD5BB29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Application", "01-Application", "{E99B428F-847E-4051-8FD7-B25F50C5C71C}"
 EndProject
