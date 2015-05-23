@@ -1,0 +1,62 @@
+﻿<div class="meeting-header">
+    <span>个人信息</span>
+</div>
+<h2 class="complaint_info_title meeting-name">用户登录信息</h2>
+<table class="deviceTable">    
+    <tr><td>加载中....</td></tr>
+</table>
+
+<div class="operate-nextBtn mt20">
+    <!--返回上一页-->
+    <input type="button" value="返回" class="saveBtn" id="btnBefore" />
+</div>
+<script type="text/x-jquery-tmpl" id="userlogininfotmp">
+    <tr>
+        <td class="w20">登录名</td>
+        <td class="w40" id="spanLoginName">{{LoginName}}</td>
+    </tr>
+    <tr>
+        <td class="w20">设备UUID</td>
+        <td class="w40" id="spanDeviceUUID">{{DeviceUUID}}</td>
+    </tr>
+    <tr>
+        <td class="w20">AuthToken</td>
+        <td class="w40" id="spanAuthToken">{{AuthToken}}</td>
+    </tr>
+    <tr>
+        <td class="w20">登录IP</td>
+        <td class="w40" id="spanLoginIp">{{LoginIP}}</td>
+    </tr>
+    <tr>
+        <td class="w20">登录端口</td>
+        <td class="w40" id="spanLoginPort">{{LoginPort}}</td>
+    </tr>
+</script>
+
+<script type="text/javascript">
+
+    //主入口
+    $(function () {
+        //返回上一页
+        $("#btnBefore").click(function () {
+            loadpage("/html/Users/UserInfoList.html");
+        });
+        Load();
+    });
+
+    //加载公告详细编辑信息
+    function Load() {
+        var url = $.cookie('pageurl');
+        var usersName = url.split("?usersName=")[1];
+        $.fspost('/api/Users/UserLoginInfo',{
+            LoginName: usersName,
+        }).success(function (data) {
+            if (data != null) {
+                $('.deviceTable').html(template('userlogininfotmp', data));
+            }
+        })
+    }
+
+
+
+</script>

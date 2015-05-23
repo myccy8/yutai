@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="login_page">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=10;IE=9;IE=8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>登陆</title>
+    <link href="../Includes/css/login.css" rel="stylesheet" />
+    <link href="../Includes/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="../Includes/js/jquery.min.js"></script>
+    <script src="../Includes/js/json2.js"></script>
+    <script src="../Includes/js/aes.js"></script>
+    <script src="/Includes/js/jquery.cookie.min.js"></script>
+    <script type="text/javascript">
+        var aessetting = { key: "zeus-2013perfect", iv: "05040F07090C010B035b0D17010A0608" };
+        $(document).ready(function () {
+            $("#btnlogin").click(function () {
+                if ($("#adusername").val() == "" || $("#password").val() == "") {
+                    $("#loginwrong").css("display", "none");
+                    $("#loginlack").css("display", "block");
+                    return false;
+                }
+                else {
+                    var requestLogin = {
+                        LoginName: $("#adusername").val(),
+                        Password: $("#password").val(),
+                        isRemember: $("#recordPwd").attr("checked") == 'checked'
+                    };
+                    $.ajax({
+                        url: '/api/Login/PostLoginUser',
+                        type: 'Post',
+                        data: JSON.stringify(requestLogin),
+                        contentType: "application/json;charset=utf-8",
+                        success: function (data) {
+                            if (data == "true" || data == "True") {
+                                $("#loginlack").css("display", "none");
+                                $("#loginwrong").css("display", "none");
+
+                                $.cookie('pageurl', '', { path: '/' });//设置页码为0
+
+                                var array = window.location.href.split('/');
+
+                                window.location.href = array[0] + "//" + array[2];
+                            }
+                            else {
+                                $("#loginlack").css("display", "none");
+                                $("#loginwrong").css("display", "block");
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        //监听回车事件
+        $(function () {
+            $("#password").keydown(function (e) {
+                var keynum;
+                if (window.event) {
+                    keynum = e.keyCode; // IE
+                } else if (e.which) {
+                    keynum = e.which; // Netscape/Firefox/Opera
+                }
+                if (keynum == 13) {
+
+                    e.preventDefault();
+
+                    $("#btnlogin").click();
+
+                }
+            });
+        })
+
+        //字符串转化为16进制类型的字符串
+        //function StrToHexStr(strin) {
+        //    var bytes = stringToBytes(strin);
+        //    var str = "";
+        //    for (var i = 0; i < bytes.length; i++) {
+        //        str += bytes[i].toString(16);
+        //    }
+        //    //var length = str.length;
+        //    //if (str.length < 32) {
+        //    //    for (var j = 0; j < 32 - length; j++) {
+        //    //        str += '0';
+        //    //    }
+        //    //} else {
+        //    //    str = str.substring(0, 31);
+        //    //}
+        //    return str;
+        //}
+        //字符串转化为字节数组
+        /*function stringToBytes(str) {
+            var ch, st, re = [];
+            for (var i = 0; i < str.length; i++) {
+                ch = str.charCodeAt(i);  // get char
+                st = [];                 // set up "stack"
+                do {
+                    st.push(ch & 0xFF);  // push byte to stack
+                    ch = ch >> 8;          // shift value down by 1 byte
+                }
+                while (ch);
+                // add stack contents to result
+                // done because chars have "wrong" endianness
+                re = re.concat(st.reverse());
+            }
+            // return an array of bytes
+            return re;
+        }*/
+    </script>
+</head>
+<body>
+    <div class="loginPage">
+
+    <div class="loginBg">
+
+        <div class="loginBorder">
+            <div class="login_box">
+			    <form novalidate="novalidate" id="Form1"  >
+                    <h1 class="top_b">登录系统 </h1>
+                    <p><label>用户名</label><input type="text" value="" name="LoginName" id="adusername"/></p>
+			        <p><label>密&nbsp;&nbsp;&nbsp;&nbsp;码</label><input type="Password" value="" name="Password" id="password"/></p>
+                    <p><label></label><input type="checkbox" id="recordPwd" class="remerberCheck" name="isRemember"/><label class="ib ml10">记住我</label></p>
+                    <div class="f_req" id="loginwrong" style="display:none;">
+                        用户名或者密码错误
+                    </div>
+                    <div class="f_req" id="loginlack" style="display:none;">
+                        用户名或者密码不能为空
+                    </div>
+                    <p class="mt30"><label></label><button type="button" class="btn" id="btnlogin">登录</button></p>
+			    </form>
+		    </div>
+        </div>
+    </div>
+
+</div>
+    
+</body>
+</html>

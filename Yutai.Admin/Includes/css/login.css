@@ -1,0 +1,55 @@
+﻿ul {
+    list-style:none;
+}
+.login_page .login_box {
+    background: none repeat scroll 0 0 #f5f5f5;
+    border-top:8px solid #5abcf1;
+   /* border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    margin: 0 auto 24px;
+    position: relative;
+    top: 50%;
+    margin-top:150px;*/
+}
+.login_box{padding:20px 30px;} /*** Alex *****/
+.login_page .top_b {
+    /*background: none repeat scroll 0 0 #E0E0E0;
+    border-bottom: 1px solid #CCCCCC;
+    border-radius: 6px 6px 0 0;*/
+    font: 900 16px/42px 'PT Sans',sans-serif;
+    height: 42px;
+    color:#777;
+    /*text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);*/
+}
+.loginBorder{display:inline-block;*display:inline;zoom:1;text-align:left;}
+.loginBg{height:535px; width:100%;text-align:center;padding-top:200px;}
+.loginPage {
+     width:1200px; 
+     margin:0 auto;
+}
+#btnlogin {
+
+    background:#67af25;
+    border:1px solid #5c9b23;
+    width:100%;*width:220px;
+    height:40px;
+    line-height:40px;
+    color:#fff;
+    border-radius:3px;
+    padding:0;
+}
+.userName,.userPassword{
+    clear: both;
+    color: #828282;
+    font-size: 14px;
+    margin:10px 0 2px 15px;
+    text-align: left;
+}
+.mt30{margin-top: 30px;}
+.f_req {
+    color: #FF0000;
+    font-family: helvetica,arial,sans-serif;
+    font-size: 13px;
+}
+.ib{ display: inline-block;}
+.ml10{ margin-left: 10px;}

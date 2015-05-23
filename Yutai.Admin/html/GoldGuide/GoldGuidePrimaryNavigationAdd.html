@@ -1,0 +1,120 @@
+﻿<style>
+    .news-line-box {
+    }
+    .news-line-box .news-name {
+        font-family: Tahoma;
+        margin-top: 5px;
+    }
+    .news-line-box .meetting-input {
+        width: 300px;
+    }
+</style>
+<div class="meeting-header">
+    <span>添加一级导航项</span>
+</div>
+<div class="news-line-box">
+    <div class="news-name formfile-label">
+        名称：
+    </div>
+    <div class="news-content">
+        <input class="meetting-input" type="text" id="txtPrimaryNavigationName" placeholder="请填写一级导航项名称" />
+        <span id="spanPrimaryNavigationName" style="color:red"></span>
+    </div>
+</div>
+
+<div class="news-line-box">
+    <div class="news-name formfile-label">
+        所述类别：
+    </div>
+    <div class="news-content" id="motherStatusRadio">
+        <input type="radio" name="sex" value="1" checked />产前导购 &nbsp;&nbsp;
+        <input type="radio" name="sex" value="0" />产后导购
+    </div><br />
+</div>
+
+<div class="operate-nextBtn mt20">
+    <input type="button" value="添加" class="saveBtn" id="btnNext" />&nbsp;&nbsp;
+    <!--返回上一页-->
+    <input type="button" value="返回" class="saveBtn" id="btnBefore" />
+</div>
+
+
+
+<script type="text/javascript">
+    var motherStatus = 1;
+    //主入口
+    $(function () {
+        //返回上一页
+        $("#btnBefore").click(function () {
+            loadpage("/html/GoldGuide/GoldGuidePrimaryNavigationList.html");
+        });
+        $("#motherStatusRadio").find("input").click(function () {
+            motherStatus = $(this).val();
+        })
+        $("#btnNext").click(function () {
+            Add();
+        })
+    });
+
+    function Add() {
+        //进行检测
+        $("#txtPrimaryNavigationName").focusout();
+        if (!checkValNull("#txtPrimaryNavigationName")) {
+            return false;
+        }
+
+
+        //开始请求
+        var request = {
+            primaryNavigationName: $("#txtPrimaryNavigationName").val(),
+            motherStatus: motherStatus
+        }
+        $.ajax({
+            url: '/api/GoldGuidePrimaryNavigation/GoldGuidePrimaryNavigationAdd',
+            type: 'Post',
+            data: JSON.stringify(request),
+            contentType: "application/json;charset=utf-8",
+            statusCode: {
+                200: function (data) {
+                    loadpage("/html/GoldGuide/GoldGuidePrimaryNavigationList.html");
+
+                }, 401: function (jqXHR, textStatus, errorThrown) {
+                    window.location.href = '/html/login.html';
+                }
+            }
+        });
+    }
+
+
+    /***focusout***/
+    $("#txtPrimaryNavigationName").focusout(function () {
+        //console.log(checkValNull("#txtNewsTitle"));
+        if (!checkValNull($(this))) {
+            $("#spanPrimaryNavigationName").text("一级导航项名称不能为空");
+        } else {
+            $("#spanPrimaryNavigationName").text("");
+        }
+    });
+
+
+    /********公告方法*******/
+
+    //检测表单元素是否为空
+    function checkValNull($val) {
+        if ($($val).val() == "") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //检测非表单元素是否为空
+    function checkTextNull($text) {
+        if ($($text).text() == "") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+</script>

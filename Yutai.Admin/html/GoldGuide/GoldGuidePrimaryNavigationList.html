@@ -1,0 +1,84 @@
+﻿<div class="meeting-header">
+    <span>金牌导购一级导航列表</span>
+</div>
+<div class="row-fluid" id="load_content">
+</div>
+<div class="mt20">
+    <input type="button" class="saveBtn" id="btnAdd" value="添加" />
+</div>
+
+<script id="GoldGuidePrimaryNavigationtemp" type="text/x-jquery-tmpl">
+    <table class="deviceTable">
+        <tr class="devicetTitle">
+            <!--<th class="userAccount" width="25%">ID</th>-->
+            <th class="deviceNum" >名称</th>
+            <th class="userAccount">所述分类</th>
+            <th class="power">操作</th>
+            </tr>
+        {{each Data}}
+        <tr class="deviceContent canclick">
+            <!--<td class="deviceContent notice deviceNum " width="20%" primarynavigationid="{{$value.primaryNavigationID}}">{{$value.primaryNavigationID}}</td>-->
+            <td class="deviceContent notice deviceNum" primarynavigationid="{{$value.primaryNavigationID}}">{{$value.primaryNavigationName}}</td>
+            <td class="deviceContent notice" primarynavigationid="{{$value.primaryNavigationID}}">{{$value.motherStatus==1?'产前导购':'产后导购'}}</td>
+            <td >
+                <input type="button" value="编辑" class="editorRole" primarynavigationid="{{$value.primaryNavigationID}}">
+                <input type="button" value="删除" class="deleteRole" primarynavigationid="{{$value.primaryNavigationID}}">
+            </td>
+            </tr>
+            {{/each}}
+</table>
+</script>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#btnAdd").click(function () {
+            loadpage("/html/GoldGuide/GoldGuidePrimaryNavigationAdd.html");
+        });
+        loadlist();
+       
+    })
+    //绑定ClickBtn事件
+    function BindClickBtn() {
+        $(".editorRole").click(function () {
+            var pageUrl = "/html/GoldGuide/GoldGuidePrimaryNavigationUpdate.html?GoldGuidePrimaryNavigationID=" + $(this).attr("primaryNavigationID");
+            $.cookie('pageurl', pageUrl);
+            loadpage(pageUrl);
+        });
+
+        $(".deleteRole").click(function () {
+            var request = {
+                primaryNavigationID: $(this).attr("primaryNavigationID"),
+            }
+            if (confirm("确定要删除?删除的同时将删除有关的二级导航项")) {
+                $.ajax({
+                    url: '/api/GoldGuidePrimaryNavigation/GoldGuidePrimaryNavigationDel',
+                    type: 'Post',
+                    data: JSON.stringify(request),
+                    contentType: "application/json;charset=utf-8",
+                    statusCode: {
+                        200: function (data) {
+                            loadlist();
+                            //loadpage("/html/GoldGuide/GoldGuidePrimaryNavigationList.html");
+                        }, 401: function (jqXHR, textStatus, errorThrown) {
+                            window.location.href = '/html/login.html';
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    //加载列表
+    function loadlist() {
+        $.fspost('/api/GoldGuidePrimaryNavigation/GoldGuidePrimaryNavigationList').success(function (data) {
+            $.cookie('total', data.Total);
+            $('#load_content').html(template('GoldGuidePrimaryNavigationtemp', data));
+            $('#pagediv').load("/html/pager.html");
+            BindClickBtn();
+        });
+    }
+
+
+</script>
