@@ -1,0 +1,84 @@
+﻿<div class="row-fluid" id="contentwrapper">
+    <table class="deviceTable" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr style="border:0px" id="_goldTemplete"></tr>
+            <tr class="devicetTitle">
+                <!--<th class="userAccount" width="25%">ID</th>-->
+                <th class="deviceNum" width="5%">图片</th>
+                <th class="userAccount">标题</th>
+                <th class="power">Url</th>
+                <th class="power" width="20%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="_image"></tbody>
+    </table>
+    <div class="mt20">
+        <input type="button" class="saveBtn" id="btnAdd" value="添加" />
+    </div>
+</div>
+<script type="text/x-jquery-tmpl" id="image_temp">
+    {{each Data}}
+    <tr class="deviceContent canclick">
+        <td class="deviceContent notice" goodsid="{{$value.Id}}">
+            <a class="cbox_single thumbnail cboxElement">
+                <img alt="" src="{{$value.ImagePath}}" style="height:70px;width:80px">
+            </a>
+        </td>
+        <td class="deviceContent notice deviceNum " width="20%" goodsid="{{$value.Id}}">{{$value.Title}}</td>
+        <td class="deviceContent notice" goodsid="{{$value.Id}}">{{$value.Url}}</td>
+        <td width="20%">
+            <input type="button" value="编辑" class="editorRole" goodsid="{{$value.Id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="删除" class="deleteRole" goodsid="{{$value.Id}}">
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        loadlist();
+        $("#btnAdd").click(function () {
+            loadpage("/html/Home/imageadd.html");
+        });
+    });
+    function loadlist() {
+        $.fspost('/api/Index/GetList', {
+        }).success(function (data) {
+            var re = { Data: data };
+            $('#_image').html(template('image_temp', re));
+            BindClickBtn();
+        });
+    }
+    //绑定ClickBtn事件
+    function BindClickBtn() {
+
+        $(".editorRole").click(function () {
+            var pageUrl = "/html/Home/imageUpdate.html?goodsid=" + $(this).attr("goodsid");
+            $.cookie('pageurl', pageUrl);
+            $.cookie('updateSelect', $("#secondSelect").val());
+            loadpage(pageUrl);
+        });
+        $(".deleteRole").click(function () {
+            var that = $(this);
+            var request = {
+                Id: $(this).attr("goodsid")
+            }
+            if (confirm("确定要删除?")) {
+                $.ajax({
+                    url: '/api/Index/DeleteImage',
+                    type: 'Post',
+                    data: JSON.stringify(request),
+                    contentType: "application/json;charset=utf-8",
+                    statusCode: {
+                        200: function (data) {
+                            that.parent().parent().remove();
+                        }, 401: function (jqXHR, textStatus, errorThrown) {
+                            window.location.href = '/html/login.html';
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>

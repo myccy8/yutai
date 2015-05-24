@@ -39,8 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IClass1.cs" />
+    <Compile Include="ICategoryItemsRepo.cs" />
+    <Compile Include="ICategoryRepo.cs" />
+    <Compile Include="IContentItemRepo.cs" />
+    <Compile Include="IIndexRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yutai.Dao\Yutai.Dao.csproj">
+      <Project>{fdfeef6f-d85f-46b6-8db5-d6379504be2c}</Project>
+      <Name>Yutai.Dao</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

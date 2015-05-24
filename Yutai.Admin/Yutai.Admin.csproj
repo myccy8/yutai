@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -167,13 +175,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authorize\HttpAuthorize.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\BaseControlle.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CategoryItemsController.cs" />
+    <Compile Include="Controllers\ContentItemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseRequest.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\PageRequest.cs" />
     <Compile Include="Models\ResponseList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs">
@@ -527,123 +542,20 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="html\Equips\EquipAdd.html" />
-    <Content Include="html\Equips\EquipsList.html" />
-    <Content Include="html\Equips\EquipUpdate.html" />
-    <Content Include="html\Equips\GoodsAdd.html" />
-    <Content Include="html\Equips\GoodsList.html" />
-    <Content Include="html\GoldGuide\GoldGuideGoodsAdd.html" />
-    <Content Include="html\GoldGuide\GoldGuideGoodsList.html" />
-    <Content Include="html\GoldGuide\GoldGuideGoodsUpdate.html" />
-    <Content Include="html\GoldGuide\GoldGuidePrimaryNavigationAdd.html" />
-    <Content Include="html\GoldGuide\GoldGuidePrimaryNavigationList.html" />
-    <Content Include="html\GoldGuide\GoldGuidePrimaryNavigationUpdate.html" />
-    <Content Include="html\GoldGuide\GoldGuideSecondaryNavigationAdd.html" />
-    <Content Include="html\GoldGuide\GoldGuideSecondaryNavigationList.html" />
-    <Content Include="html\GoldGuide\NextNavUpdate.html" />
+    <Content Include="html\Articles\add.html" />
+    <Content Include="html\Articles\list.html" />
+    <Content Include="html\Articles\update.html" />
+    <Content Include="html\Category\add.html" />
+    <Content Include="html\Category\list.html" />
+    <Content Include="html\Category\update.html" />
+    <Content Include="html\CategoryItems\add.html" />
+    <Content Include="html\CategoryItems\list.html" />
+    <Content Include="html\CategoryItems\update.html" />
+    <Content Include="html\Home\imageadd.html" />
+    <Content Include="html\Home\imagelist.html" />
+    <Content Include="html\Home\imageUpdate.html" />
     <Content Include="html\login.html" />
-    <Content Include="html\News\GoodAdd.html" />
-    <Content Include="html\News\GoodList.html" />
-    <Content Include="html\News\NewsAdd.html" />
-    <Content Include="html\News\NewsList.html" />
-    <Content Include="html\News\NewsUpdate.html" />
     <Content Include="html\pager.html" />
-    <Content Include="html\Users\UserInfoList.html" />
-    <Content Include="html\Users\UserLoginInfo.html" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\GoldGuide\GoodsImg\107ee48f-4882-4df3-8c1f-854b0462731d.png" />
-    <Content Include="Images\GoldGuide\GoodsImg\212d352e-b7b2-445e-a63d-e4ac7b926b6f.png" />
-    <Content Include="Images\GoldGuide\GoodsImg\5b46430d-f8c5-42b6-bde5-01b11eb0c72c.png" />
-    <Content Include="Images\GoldGuide\GoodsImg\7bd1484c-509f-408a-8d55-1c3e41f5d8b4.png" />
-    <Content Include="Images\GoldGuide\GoodsImg\9c0b7331-23fb-4cec-bdd3-278d9e79376d.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\01965332-cbdb-4a88-9e6f-7491a3dea833.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\1a2bf34b-6061-4f94-8da9-5cbbe7bfd54d.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\1a77ceef-7bf8-454c-b563-85407e57cf0b.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\3352c1e4-aec7-4b96-96cf-eda33af22146.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\3c55f134-5e29-4078-898f-49303fd126a3.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\4605fbd9-e719-45fe-9ccf-3fba59c18124.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\4dc1429b-09a0-403f-8c71-45a70d03ecad.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\6be86a07-e8ae-46ed-91de-d5ab38261460.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\70dda8a2-ce4e-403c-bdba-ac0132b7e273.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\727acd20-f7d7-488f-bc5c-d3464917cde7.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\77edf0a3-171b-44b7-b709-6c3257aa0a45.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\881614ac-0a1d-4ff8-94ff-bf75d59691bd.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\88face9b-3533-4558-bbdb-25c084ed3af4.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\9499793f-d2d0-4bf7-b7ce-0277932cbbd5.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\a725eecc-a967-4b4e-b79d-a1af77b3aef1.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\ab0c53a3-5eea-4b65-83d8-472d4a182c68.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\b46a89f6-c47a-47e9-8fca-3ab0f68e94de.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\c1c712c3-e027-422c-a86a-fd74c3de6628.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\d1398a80-7d53-497d-b0a8-8d57d72b37b6.png" />
-    <Content Include="Images\GoldGuide\NextNavImg\e13e3e87-da1b-4fe8-aaa9-c9103f2c8b50.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\e8e85327-ec64-4ae6-b754-b28d81b18c91.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\f7008893-f46f-4767-8acb-db2823cd3dc9.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\f9d2c17a-e106-48c6-be6d-69e71ddd39bc.jpg" />
-    <Content Include="Images\GoldGuide\NextNavImg\fea6ccad-f305-4f21-a823-c731786b611a.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\News\GoodsImg\07228317-8e2c-4a83-895a-599fe252de35.jpg" />
-    <Content Include="Images\News\GoodsImg\0d8df1d4-2fd4-4a25-b712-de95590dcb68.png" />
-    <Content Include="Images\News\GoodsImg\1519caad-a6df-43ca-add4-6c8bb77888d3.jpg" />
-    <Content Include="Images\News\GoodsImg\181ab7e1-ea53-4c6e-b47e-58df7699810c.jpg" />
-    <Content Include="Images\News\GoodsImg\227c0179-588e-4638-af1b-7983309bb155.jpg" />
-    <Content Include="Images\News\GoodsImg\321b2fb7-7a61-439f-9f08-81d91d19fdd2.jpg" />
-    <Content Include="Images\News\GoodsImg\3e47af84-24f9-4c4e-8bd9-476633a29138.jpg" />
-    <Content Include="Images\News\GoodsImg\3f78328b-0b49-43bc-b98f-66a109bd9534.jpg" />
-    <Content Include="Images\News\GoodsImg\51f20f2b-7b96-4c44-a5da-07da0caeddd9.jpg" />
-    <Content Include="Images\News\GoodsImg\53edd2f7-2c60-4ad4-a751-04502f2435af.jpg" />
-    <Content Include="Images\News\GoodsImg\555b529e-9b30-4871-b72a-bc44c9862d26.jpg" />
-    <Content Include="Images\News\GoodsImg\66aab4b5-5c85-40f8-a443-62259f0a73a7.jpg" />
-    <Content Include="Images\News\GoodsImg\cfc4c681-8742-4de0-af7c-2098a72137e8.jpg" />
-    <Content Include="Images\News\GoodsImg\dad4ef58-46cb-43e3-9faf-12450895198d.jpg" />
-    <Content Include="Images\News\GoodsImg\dcf2a09e-ff61-4029-ad0a-1d25d0378735.jpg" />
-    <Content Include="Images\News\GoodsImg\de8af773-efa0-4264-9dac-5784d1bbef36.jpg" />
-    <Content Include="Images\News\GoodsImg\eae0969c-be22-467a-a64d-03324efa68d8.jpg" />
-    <Content Include="Images\News\GoodsImg\eccec333-edeb-47be-a257-5a9da1ff06e1.jpg" />
-    <Content Include="Images\News\GoodsImg\eedf337a-8049-444f-b900-3d7e185f29c7.jpg" />
-    <Content Include="Images\News\GoodsImg\f27627ac-5228-4229-8c4d-f8b27c032c06.jpg" />
-    <Content Include="Images\News\GoodsImg\f3639e5e-c087-4f7d-b91d-c99b58620cc2.jpg" />
-    <Content Include="Images\News\NewsImg\0a85de96-950a-4a8f-a02d-752db615dfb9.jpg" />
-    <Content Include="Images\News\NewsImg\1234325c-66a3-47c5-85f6-933013328dde.jpg" />
-    <Content Include="Images\News\NewsImg\12696649-a5f4-475b-92b0-e81ca9692f01.jpg" />
-    <Content Include="Images\News\NewsImg\20a2ab56-a838-4b0c-93db-86cb49f8319f.jpg" />
-    <Content Include="Images\News\NewsImg\249ac643-bc6f-4a41-aa9e-312d465411f5.jpg" />
-    <Content Include="Images\News\NewsImg\286c9aad-c0f4-4e20-8480-447d3e7d54b3.jpg" />
-    <Content Include="Images\News\NewsImg\3931627f-2973-450a-aa0a-d2017259d0cc.jpg" />
-    <Content Include="Images\News\NewsImg\39e94f5d-c41b-496d-b832-55d26ab2652d.jpg" />
-    <Content Include="Images\News\NewsImg\3c16a682-11ef-4106-90ab-2cce14c07279.jpg" />
-    <Content Include="Images\News\NewsImg\41206fe3-b567-4c65-89d2-ad955e5c3e83.jpg" />
-    <Content Include="Images\News\NewsImg\452f93ab-446a-4e92-9ede-46791850abeb.jpg" />
-    <Content Include="Images\News\NewsImg\4f6098c1-c118-493a-bf31-eadb60693fc5.png" />
-    <Content Include="Images\News\NewsImg\69be2266-6c37-42cc-a87d-d053f4e32402.jpg" />
-    <Content Include="Images\News\NewsImg\6ea1c6dc-a01f-4a70-b2a7-3fa848d7d94e.jpg" />
-    <Content Include="Images\News\NewsImg\800c8000-bf38-4876-8ecd-ec3dca2ebc7a.jpg" />
-    <Content Include="Images\News\NewsImg\8b176452-0c01-415d-adb9-8d8cdfeb2d4a.jpg" />
-    <Content Include="Images\News\NewsImg\9287c96c-7e01-4cba-8f8a-b6b4957c5da8.jpg" />
-    <Content Include="Images\News\NewsImg\9c7a6f08-2964-4ce0-8764-ff33557031f1.jpg" />
-    <Content Include="Images\News\NewsImg\a1dfedd6-8d2d-47b8-8081-41dc60b383cc.jpg" />
-    <Content Include="Images\News\NewsImg\a3085bb8-39f8-4e61-926e-9d8b9ee269f3.jpg" />
-    <Content Include="Images\News\NewsImg\a5b098c9-ea4d-4a5d-91f7-4c4617667d48.jpg" />
-    <Content Include="Images\News\NewsImg\af6eeebe-f424-4716-8089-698f245bcc2d.jpg" />
-    <Content Include="Images\News\NewsImg\b7a122ac-d50d-4292-98f8-4e6a227b7f45.jpg" />
-    <Content Include="Images\News\NewsImg\c1092978-7870-4bf2-b85c-27c4f65243ae.jpg" />
-    <Content Include="Images\News\NewsImg\c183b79c-e967-4e4e-a03e-379c72a8b8ea.jpg" />
-    <Content Include="Images\News\NewsImg\d8f3d286-abbe-4f43-acca-32350f461e3d.jpg" />
-    <Content Include="Images\News\NewsImg\dac135e2-e721-42cb-8bfb-276307ca7b38.jpg" />
-    <Content Include="Images\News\NewsImg\e19f5765-9d80-43f5-a19e-fd83e741f18c.jpg" />
-    <Content Include="Images\News\NewsImg\e9caabcc-5a2c-4278-bac4-ac893580c657.jpg" />
-    <Content Include="Images\News\NewsImg\fd4fbff8-840a-4254-b29d-d05dff62125c.jpg" />
-    <Content Include="Images\no-image.jpg" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Includes\bootstrap\css\bootstrap-image-gallery.min.css" />
     <Content Include="Includes\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Includes\bootstrap\css\bootstrap-responsive.min.css" />
@@ -1911,6 +1823,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\CategoryItems\" />
+    <Folder Include="Images\ContentItems\" />
+    <Folder Include="Images\Home\" />
     <Folder Include="Includes\lib\plupload\examples\uploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -1919,6 +1834,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yutai.Dao\Yutai.Dao.csproj">
+      <Project>{fdfeef6f-d85f-46b6-8db5-d6379504be2c}</Project>
+      <Name>Yutai.Dao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yutai.IService\Yutai.IService.csproj">
+      <Project>{3dd35130-9999-4bae-b99e-766e982af138}</Project>
+      <Name>Yutai.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yutai.Service\Yutai.Service.csproj">
+      <Project>{26f3f78f-f686-40e4-9ec8-4e2ab3fa5386}</Project>
+      <Name>Yutai.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

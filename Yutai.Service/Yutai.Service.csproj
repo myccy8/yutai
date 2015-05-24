@@ -30,23 +30,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BaseRepo.cs" />
+    <Compile Include="CategoryItemsRepo.cs" />
+    <Compile Include="CategoryRepo.cs" />
+    <Compile Include="ContentItemRepo.cs" />
+    <Compile Include="IndexRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Yutai.Dao\Yutai.Dao.csproj">
+      <Project>{fdfeef6f-d85f-46b6-8db5-d6379504be2c}</Project>
+      <Name>Yutai.Dao</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yutai.IService\Yutai.IService.csproj">
       <Project>{3dd35130-9999-4bae-b99e-766e982af138}</Project>
       <Name>Yutai.IService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

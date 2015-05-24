@@ -1,0 +1,118 @@
+﻿<div class="row-fluid" id="contentwrapper">
+    <table class="deviceTable" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr style="border:0px" id="_c2Templete"></tr>
+            <tr class="devicetTitle">
+                <!--<th class="userAccount" width="25%">ID</th>-->
+                <th class="deviceNum" width="5%">图片</th>
+                <th class="deviceNum" width="5%">标题</th>
+                <th class="userAccount">描述</th>
+                <th class="power" width="20%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="_ContentItems"></tbody>
+    </table>
+    <div class="mt20">
+        <input type="button" class="saveBtn" id="btnAdd" value="添加" />
+    </div>
+</div>
+<script type="text/x-jquery-tmpl" id="ContentItems">
+    {{each Data}}
+    <tr class="deviceContent canclick">
+        <td class="deviceContent notice" contentitemid="{{$value.ContentItemId}}">
+            <a class="cbox_single thumbnail cboxElement">
+                <img alt="" src="{{$value.ItemImage}}" style="height:70px;width:80px">
+            </a>
+        </td>
+        <td class="deviceContent notice deviceNum " width="20%" contentitemid="{{$value.ContentItemId}}">{{$value.ItemTitle}}</td>
+        <td class="deviceContent notice deviceNum " width="20%" contentitemid="{{$value.ContentItemId}}">{{$value.ItemDetail}}</td>
+        <td width="20%">
+            <input type="button" value="编辑" class="editorRole" contentitemid="{{$value.ContentItemId}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="删除" class="deleteRole" contentitemid="{{$value.ContentItemId}}" />
+        </td>
+    </tr>
+    {{/each}}
+    <div id="pagediv"></div>
+</script>
+<script type="text/x-jquery-tmpl" id="c2Templete">
+    <th>
+        <div class="news-name formfile-label" style=" margin-bottom: -10px; ">选择分类</div>
+        <select class="NewSelect" name="categoryItems" id="categoryItems" onchange="selectCategoryItemsId()">
+            {{if Data.length==0}}
+            <option value="-1">选择模块</option>
+            {{/if}}
+            {{each Data}}
+            <option value="{{$value.CategoryItemsId}}">{{$value.Title}}</option>
+            {{/each}}
+        </select>
+    </th>
+</script>
+<script type="text/javascript">
+    var categoryItemsId;
+    $(function () {
+        loadCategory();
+        $("#btnAdd").click(function () {
+            loadpage("/html/Articles/add.html");
+        });
+    });
+    function loadlist() {
+        $.fspost('/api/ContentItem/GetList', {
+            PageIndex: $.cookie('pageindex'),// $.cookie('pageindex')
+            PageSize: $.PageSize,
+            Id: categoryItemsId
+        }).success(function (data) {
+            $('#_ContentItems').html(template('ContentItems', data));
+            BindClickBtn();
+        });
+    }
+    function selectCategoryItemsId() {
+        categoryItemsId = $('#categoryItems').val();
+        if (categoryItemsId != -1) {
+            loadlist();
+        }
+    }
+    function loadCategory() {
+        $.fspost('/api/CategoryItems/GetAllList', {
+        }).success(function (data) {
+            if (data && data.Data.length > 0) {
+                categoryItemsId = data.Data[0].CategoryItemsId;
+                    loadlist();
+            } else {
+                categoryItemsId = -1;
+            }
+            $('#_c2Templete').html(template('c2Templete', data));
+        });
+    }
+    //绑定ClickBtn事件
+    function BindClickBtn() {
+
+        $(".editorRole").click(function () {
+            var pageUrl = "/html/Articles/update.html?contentitemid=" + $(this).attr("contentitemid");
+            $.cookie('pageurl', pageUrl);
+            $.cookie('categoryItems', $("#categoryItems").val());
+            loadpage(pageUrl);
+        });
+        $(".deleteRole").click(function () {
+            var that = $(this);
+            var request = {
+                Id: $(this).attr("contentitemid")
+            }
+            if (confirm("确定要删除?")) {
+                $.ajax({
+                    url: '/api/ContentItem/Delete',
+                    type: 'Post',
+                    data: JSON.stringify(request),
+                    contentType: "application/json;charset=utf-8",
+                    statusCode: {
+                        200: function (data) {
+                            that.parent().parent().remove();
+                        }, 401: function (jqXHR, textStatus, errorThrown) {
+                            window.location.href = '/html/login.html';
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>
