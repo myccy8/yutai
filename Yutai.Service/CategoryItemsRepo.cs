@@ -94,5 +94,16 @@ namespace Yutai.Service
             });
             return entity;
         }
+
+
+        public CategoryItems GetSingleByName(string categoryItemName)
+        {
+            CategoryItems entity = null;
+            Exec((db) =>
+            {
+                entity = db.CategoryItems.SingleOrDefault(x => x.Title == categoryItemName);
+            });
+            return entity;
+        }
     }
 }

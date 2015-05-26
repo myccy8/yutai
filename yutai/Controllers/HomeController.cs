@@ -46,7 +46,7 @@ namespace yutai.Controllers
                 var item = categoryItemsRepo.GetCategoryItems(category.CategoryId, 0, 0, out total);
                 list = item.Select(x => new
                 {
-                     categoryId=x.CategoryId,
+                    categoryId = x.CategoryId,
                     categoryItemsId = x.CategoryItemsId,
                     categoryImage = x.CategoryImage,
                     title = x.Title
@@ -59,19 +59,23 @@ namespace yutai.Controllers
         public object GetArticles(RequestById request)
         {
             int total = 0;
-            var item = categoryItemsRepo.GetSingle(request.id);
-            var category = categoryRepo.GetSingle(request.categoryId);
-            var articles = contentItemRepo.GetContentItems(request.id, request.index, request.size, out total);
-            return new
+            object obj = new object();
+            var item = categoryItemsRepo.GetSingleByName(request.categoryItemName);
+            if (item != null)
             {
-                title = item.Title,
-                indexImage = item.ContentImage,
-                categoryImage=item.CategoryImage,
-                content = item.Content,
-                categoryName = category.Name,
-                total=total,
-                articles = articles.Select(x => new { detail = x.ItemDetail, title = x.ItemTitle, image = x.ItemImage, url = x.Url })
-            };
+                var articles = contentItemRepo.GetContentItems(item.CategoryItemsId, request.index, request.size, out total);
+                obj= new
+                {
+                    title = item.Title,
+                    indexImage = item.ContentImage,
+                    categoryImage = item.CategoryImage,
+                    content = item.Content,
+                    categoryName = item.Title,
+                    total = total,
+                    articles = articles.Select(x => new { detail = x.ItemDetail, title = x.ItemTitle, image = x.ItemImage, url = x.Url })
+                };
+            }
+            return obj;
         }
     }
 }

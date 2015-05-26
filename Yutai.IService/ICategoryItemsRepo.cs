@@ -15,5 +15,7 @@ namespace Yutai.IService
         bool Del(int id);
         bool Update(CategoryItems entity);
         CategoryItems GetSingle(int id);
+        CategoryItems GetSingleByName(string  categoryItemName);
+        
     }
 }
