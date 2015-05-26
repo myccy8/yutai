@@ -46,6 +46,7 @@ namespace yutai.Controllers
                 var item = categoryItemsRepo.GetCategoryItems(category.CategoryId, 0, 0, out total);
                 list = item.Select(x => new
                 {
+                     categoryId=x.CategoryId,
                     categoryItemsId = x.CategoryItemsId,
                     categoryImage = x.CategoryImage,
                     title = x.Title
@@ -65,8 +66,10 @@ namespace yutai.Controllers
             {
                 title = item.Title,
                 indexImage = item.ContentImage,
+                categoryImage=item.CategoryImage,
                 content = item.Content,
                 categoryName = category.Name,
+                total=total,
                 articles = articles.Select(x => new { detail = x.ItemDetail, title = x.ItemTitle, image = x.ItemImage, url = x.Url })
             };
         }
