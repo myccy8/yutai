@@ -25,6 +25,8 @@
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<CategoryItems> CategoryItems { get; set; }
         public virtual DbSet<ContentItem> ContentItem { get; set; }
+        public virtual DbSet<Concert> Concert { get; set; }
+        public virtual DbSet<ConcertCategory> ConcertCategory { get; set; }
     }
 
     //public class MyEntity

@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="ICategoryItemsRepo.cs" />
     <Compile Include="ICategoryRepo.cs" />
+    <Compile Include="IConcertCategoryRepo.cs" />
+    <Compile Include="IConcertRepo.cs" />
     <Compile Include="IContentItemRepo.cs" />
     <Compile Include="IIndexRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

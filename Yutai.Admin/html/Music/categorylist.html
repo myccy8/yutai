@@ -1,0 +1,76 @@
+﻿<div class="row-fluid" id="contentwrapper">
+    <table class="deviceTable" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr style="border:0px" id="_goldTemplete"></tr>
+            <tr class="devicetTitle">
+                <th class="userAccount">名称</th>
+                <th class="power" width="20%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="_category2"></tbody>
+    </table>
+    <div class="mt20">
+        <input type="button" class="saveBtn" id="btnAdd" value="添加" />
+    </div>
+</div>
+<script type="text/x-jquery-tmpl" id="category2">
+    {{each Data}}
+    <tr class="deviceContent canclick">
+        <td class="deviceContent notice" concertcategoryid="{{$value.CategoryId}}">
+            {{$value.Name}}
+        </td>
+        <td width="20%">
+            <input type="button" value="编辑" class="editorRole" concertcategoryid="{{$value.CategoryId}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="删除" class="deleteRole" concertcategoryid="{{$value.CategoryId}}">
+        </td>
+    </tr>
+    {{/each}}
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        loadlist();
+        $("#btnAdd").click(function () {
+            loadpage("/html/Music/addcategory.html");
+        });
+    });
+    function loadlist() {
+        $.fspost('/api/MusicCategory/GetList', {
+        }).success(function (data) {
+            var re = { Data: data };
+            $('#_category2').html(template('category2', re));
+            BindClickBtn();
+        });
+    }
+    //绑定ClickBtn事件
+    function BindClickBtn() {
+
+        $(".editorRole").click(function () {
+            var pageUrl = "/html/Music/categoryupdate.html?concertcategoryid=" + $(this).attr("concertcategoryid");
+            $.cookie('pageurl', pageUrl);
+            loadpage(pageUrl);
+        });
+        $(".deleteRole").click(function () {
+            var that = $(this);
+            var request = {
+                Id: $(this).attr("concertcategoryid")
+            }
+            if (confirm("确定要删除?")) {
+                $.ajax({
+                    url: '/api/MusicCategory/Delete',
+                    type: 'Post',
+                    data: JSON.stringify(request),
+                    contentType: "application/json;charset=utf-8",
+                    statusCode: {
+                        200: function (data) {
+                            that.parent().parent().remove();
+                        }, 401: function (jqXHR, textStatus, errorThrown) {
+                            window.location.href = '/html/login.html';
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>

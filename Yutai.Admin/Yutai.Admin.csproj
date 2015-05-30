@@ -183,6 +183,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MusicCategoryController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -556,6 +558,9 @@
     <Content Include="html\Home\imageUpdate.html" />
     <Content Include="html\login.html" />
     <Content Include="html\Music\add.html" />
+    <Content Include="html\Music\addcategory.html" />
+    <Content Include="html\Music\categorylist.html" />
+    <Content Include="html\Music\categoryupdate.html" />
     <Content Include="html\Music\list.html" />
     <Content Include="html\Music\update.html" />
     <Content Include="html\pager.html" />
@@ -1827,6 +1832,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\CategoryItems\" />
+    <Folder Include="Images\Concert\" />
     <Folder Include="Images\ContentItems\" />
     <Folder Include="Images\Home\" />
     <Folder Include="Includes\lib\plupload\examples\uploads\" />

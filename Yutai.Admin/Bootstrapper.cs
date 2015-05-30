@@ -25,6 +25,8 @@ namespace Yutai.Admin
             builder.RegisterType<CategoryRepo>().As<ICategoryRepo>();
             builder.RegisterType<CategoryItemsRepo>().As<ICategoryItemsRepo>();
             builder.RegisterType<ContentItemRepo>().As<IContentItemRepo>();
+            builder.RegisterType<ConcertCategoryRepo>().As<IConcertCategoryRepo>();
+            builder.RegisterType<ConcertRepo>().As<IConcertRepo>();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(builder.Build());
         }

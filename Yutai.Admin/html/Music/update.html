@@ -13,11 +13,11 @@
 </style>
 
 <div class="meeting-header">
-    <span>添加文章</span>
+    <span>修改模块</span>
 </div>
-<form id="formfile" action="/api/ContentItem/UpdateItems" method="post" enctype="multipart/form-data" name="formfile" target="submitgoods">
-    <div id="_c4Templete"></div>
-    <input id="contentitemid" name="contentitemid" type="hidden" />
+<form id="formfile" action="/api/Music/UpdateItems" method="post" enctype="multipart/form-data" name="formfile" target="submitgoods">
+    <div id="_ccSelect5"></div>
+    <input id="categoryitemsid" name="concertId" type="hidden" />
     <div class="news-line-box">
         <div class="news-name formfile-label">
             标题：
@@ -38,14 +38,59 @@
     </div>
     <div class="news-line-box">
         <div class="news-name formfile-label">
-            图片
+            详情：
+        </div>
+        <div class="news-content">
+            <input class="meetting-input" type="text" id="txtDetail" placeholder="请填写内容" name="detail" />
+            <span id="spanDetail" style="color:red"></span>
+        </div>
+    </div>
+    <div class="news-line-box">
+        <div class="news-name formfile-label">
+            时间：
+        </div>
+        <div class="news-content">
+            <input class="meetting-input" type="text" id="txtTime" placeholder="请填写内容" name="time" />
+            <span id="spanTime" style="color:red"></span>
+        </div>
+    </div>
+    <div class="news-line-box">
+        <div class="news-name formfile-label">
+            价格：
+        </div>
+        <div class="news-content">
+            <input class="meetting-input" type="text" id="txtPrice" placeholder=" 请填写内容" name="price" />
+            <span id="spanPrice" style="color:red"></span>
+        </div>
+    </div>
+    <div class="news-line-box">
+        <div class="news-name formfile-label">
+            纬度：
+        </div>
+        <div class="news-content">
+            <input class="meetting-input" type="text" id="txtLat" placeholder=" 请填写内容" name="lat" />
+            <span id="spanLat" style="color:red"></span>
+        </div>
+    </div>
+    <div class="news-line-box">
+        <div class="news-name formfile-label">
+            经度：
+        </div>
+        <div class="news-content">
+            <input class="meetting-input" type="text" id="txtLng" placeholder=" 请填写内容" name="lng" />
+            <span id="spanLng" style="color:red"></span>
+        </div>
+    </div>
+    <div class="news-line-box">
+        <div class="news-name formfile-label">
+            导航图片
         </div>
         <div class="news-content">
             <div class="upload_img" style="height: 137px; width: 148px;" id="preview_fake">
                 <img id="preview" src="/Images/no-image.jpg" style=" width:130px; height: 130px;" />
             </div>
             <div class="upload_product">
-                <input type="file" id="uploadfile" style=" position: absolute; opacity: 0; width: 76px; height: 30px; cursor: pointer;" name="Img" />
+                <input type="file" id="uploadfile" style=" position: absolute; opacity: 0; width: 76px; height: 30px; cursor: pointer;" name="Img1" />
                 <button class="upload_btn">
                     上传
                 </button>
@@ -55,11 +100,19 @@
     </div>
     <div class="news-line-box">
         <div class="news-name formfile-label">
-            链接地址：
+            内容图片
         </div>
         <div class="news-content">
-            <input class="meetting-input" type="text" id="txtLink" placeholder="请填写链接地址" name="url" />
-            <span id="spanLink" style="color:red"></span>
+            <div class="upload_img" style="height: 137px; width: 148px;" id="preview_fake2">
+                <img id="preview2" src="/Images/no-image.jpg" style=" width:130px; height: 130px;" />
+            </div>
+            <div class="upload_product">
+                <input type="file" id="uploadfile2" style=" position: absolute; opacity: 0; width: 76px; height: 30px; cursor: pointer;" name="Img2" />
+                <button class="upload_btn">
+                    上传
+                </button>
+                <span id="spanImg2" style="color:red"></span>
+            </div>
         </div>
     </div>
     <div class="operate-nextBtn mt20">
@@ -69,32 +122,33 @@
     </div>
 </form>
 <iframe id="submitgoods" name="submitgoods" style="display:none;"></iframe>
-<script type="text/x-jquery-tmpl" id="c4Templete">
-    <div class="news-name formfile-label" >选择分类</div>
-    <select class="NewSelect" name="categoryItemsId" id="categoryItems">
+<script type="text/x-jquery-tmpl" id="ccTemplete5">
+    <div class="news-name formfile-label" style=" margin-bottom: -10px; ">选择分类</div>
+    <select class="NewSelect" name="categoryId" id="category" style="margin-top:13px">
         {{if Data.length==0}}
-        <option value="-1">选择模块</option>
+        <option value="-1">选择分类</option>
         {{/if}}
         {{each Data}}
-        <option value="{{$value.CategoryItemsId}}">{{$value.Title}}</option>
+        <option value="{{$value.CategoryId}}">{{$value.Name}}</option>
         {{/each}}
     </select>
 </script>
 <script type="text/javascript">
-    var categoryItemsId;
     //主入口
     $(function () {
         loadCategory();
-        Load();
         $("#uploadfile").change(function () {
             change();
         });
+        $("#uploadfile2").change(function () {
+            conChange();
+        });
         //返回上一页
         $("#btnBefore").click(function () {
-            loadpage("/html/Articles/list.html");
+            loadpage("/html/Music/list.html");
         });
         $('#formfile').submit(function () {
-            if (categoryItemsId == -1) {
+            if ($("#categoryId").val() == '-1') {
                 return false;
             }
             if ($("#preview").attr("src") == "/Images/no-image.jpg") {
@@ -102,6 +156,12 @@
                 return false;
             } else {
                 $("#spanImg").text("");
+            };
+            if ($("#preview2").attr("src") == "/Images/no-image.jpg") {
+                $("#spanImg2").text("图片不能为空");
+                return false;
+            } else {
+                $("#spanImg2").text("");
             };
             var a = setInterval(function () {
                 var val = $(top['submitgoods'].document.body).text();
@@ -113,11 +173,66 @@
             return Add();
         })
     });
+
     function loadCategory() {
-        $.fspost('/api/CategoryItems/GetAllList', {
-        }).success(function (data) { 
-            $('#_c4Templete').html(template('c4Templete', data));
-            $("#categoryItems").val($.cookie('categoryItems'));
+        $.fspost('/api/MusicCategory/GetList', {
+        }).success(function (data) {
+            var re = { Data: data };
+            $('#_ccSelect5').html(template('ccTemplete5', re));
+            $("#category").val($.cookie('updateSelect'));
+            Load();
+        });
+    }
+    function conChange() {
+        var pic = document.getElementById("preview2"),
+           file = document.getElementById("uploadfile2"),
+           isIE6 = navigator.userAgent.match(/MSIE 6.0/) != null;
+        if ("FileReader" in window) {
+            html5Reader2(file);
+        }
+        else {
+            file.select();
+            file.blur();
+            var reallocalpath = document.selection.createRange().text;
+            if (isIE6) {
+                pic.src = reallocalpath;
+            }
+            else {
+                pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+                pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + reallocalpath + "\")";
+            }
+        }
+    }
+
+    function Load() {
+        var url = $.cookie('pageurl');
+        var Id = url.split("?concertid=")[1];
+        $("#categoryitemsid").val(Id);
+        var postData = {
+            Id: Id,
+        };
+        $.ajax({
+            url: '/api/Music/GetSingle',
+            type: 'POST',
+            async: false,
+            data: JSON.stringify(postData),
+            contentType: "application/json;charset=utf-8",
+            timeout: 3000,
+            statusCode: {
+                200: function (data) {
+                    $("#txtTitle").val(data.Title);//newsUpdateDate
+                    $("#txtContent").val(data.Content);
+                    $("#preview").attr("src", data.CategoryImage);
+                    $("#preview2").attr("src", data.ContentImage);
+                    $("#txtDetail").val(data.Detail);
+                    $("#txtLng").val(data.Lng);
+                    $("#txtLat").val(data.Lat);
+                    $("#txtTime").val(data.Time);
+                    $("#txtPrice").val(data.Price);
+                }, 401: function (jqXHR, textStatus, errorThrown) {
+                    window.location.href = '/html/login.html';
+                }
+            }
         });
     }
     function change() {
@@ -140,32 +255,6 @@
             }
         }
     };
-    function Load() {
-        var url = $.cookie('pageurl');
-        var Id = url.split("?contentitemid=")[1];
-        $("#contentitemid").val(Id);
-        var postData = {
-            Id: Id,
-        };
-        $.ajax({
-            url: '/api/ContentItem/GetSingle',
-            type: 'POST',
-            async: false,
-            data: JSON.stringify(postData),
-            contentType: "application/json;charset=utf-8",
-            timeout: 3000,
-            statusCode: {
-                200: function (data) {
-                    $("#txtTitle").val(data.ItemTitle);//newsUpdateDate
-                    $("#txtContent").val(data.ItemDetail);
-                    $("#txtLink").val(data.Url);
-                    $("#preview").attr("src", data.ItemImage);
-                }, 401: function (jqXHR, textStatus, errorThrown) {
-                    window.location.href = '/html/login.html';
-                }
-            }
-        });
-    }
     function html5Reader(file) {
         var file = file.files[0];
         var reader = new FileReader();
@@ -175,6 +264,16 @@
             pic.src = this.result;
         }
     }
+    function html5Reader2(file) {
+        var file = file.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            var pic = document.getElementById("preview2");
+            pic.src = this.result;
+        }
+    }
+
     function Add() {
         //进行检测
         $("#txtTitle").focusout();

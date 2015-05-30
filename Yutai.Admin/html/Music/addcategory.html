@@ -1,0 +1,147 @@
+﻿<style>
+    .news-line-box {
+    }
+
+        .news-line-box .news-name {
+            font-family: Tahoma;
+            margin-top: 5px;
+        }
+
+        .news-line-box .meetting-input {
+            width: 300px;
+        }
+</style>
+
+<div class="meeting-header">
+    <span>添加分类</span>
+</div>
+<div class="news-line-box">
+    <div class="news-name formfile-label">
+        分类名称：
+    </div>
+    <div class="news-content">
+        <input class="meetting-input" type="text" id="txtName" placeholder="请填写名称" />
+        <span id="spanName" style="color:red"></span>
+    </div>
+</div>
+
+<!--<div class="news-line-box">
+    <div class="news-content">
+        <textarea id="txtckeditor" name="txteditor" class="meetting-input .ckeditor"></textarea>
+    </div>
+</div>-->
+
+<div class="operate-nextBtn mt20">
+    <input type="button" value="添加" class="saveBtn" id="btnNext" />&nbsp;&nbsp;&nbsp;
+    <!--返回上一页-->
+    <input type="button" value="返回" class="saveBtn" id="btnBefore" />
+</div>
+
+
+<script type="text/javascript">
+    //主入口
+    $(function () {
+        //返回上一页
+        $("#btnBefore").click(function () {
+            loadpage("/html/Music/categorylist.html");
+        });
+        $("#btnNext").click(function () {
+            Add();
+            $(this).attr("disabled", true);
+        })
+    });
+
+    function Add() {
+        //进行检测
+        $("#txtName").focusout();
+        if (!checkValNull("#txtName")) {
+            $("#btnNext").attr("disabled", false);
+            return false;
+        }
+
+        //开始请求
+        var request = {
+            Name: $("#txtName").val(),
+        }
+        $.ajax({
+            url: '/api/MusicCategory/Add',
+            type: 'Post',
+            data: JSON.stringify(request),
+            contentType: "application/json;charset=utf-8",
+            statusCode: {
+                200: function (data) {
+                    loadpage("/html/Music/categorylist.html");
+
+                }, 401: function (jqXHR, textStatus, errorThrown) {
+                    window.location.href = '/html/login.html';
+                }
+            }
+        });
+    }
+
+    /******控件注册*****/
+
+    function ControlReisterDataPicker() {
+        $('input[type="text"].jdatepicker').each(function () {
+            var $this = $(this);
+            if (!$this.attr('yrange')) {
+                $this.datepicker({
+                    changeMonth: true, changeYear: true, onSelect: function () {
+                        $(this).focusout();
+                    }
+                });
+            } else {
+                var year = $this.val().split('年')[0];
+                $this.datepicker({ minDate: new Date(year, 0, 1), maxDate: new Date(year, 11, 31), changeMonth: true });
+            }
+        });
+    }
+
+    function ControlRegisterCkeditor() {
+        var editor = CKEDITOR.instances['txtckeditor'];  //内存未释放才会导致会闪好几下
+        if (editor) {
+            CKEDITOR.remove(editor);
+        }
+        CKEDITOR.replace('txtckeditor');
+    }
+
+    /***focusout***/
+    $("#txtName").focusout(function () {
+        //console.log(checkValNull("#txtNewsTitle"));
+        if (!checkValNull($(this))) {
+            $("#spanName").text("分类名称不能为空");
+        } else {
+            $("#spanName").text("");
+        }
+    });
+
+    //检测表单元素是否为空
+    function checkValNull($val) {
+        if ($($val).val() == "") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //检测非表单元素是否为空
+    function checkTextNull($text) {
+        if ($($text).text() == "") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //检测时间格式
+    function dateVerity(date) {
+        var patrn = /(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)/;
+        if (!patrn.test(date)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+</script>

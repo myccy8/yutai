@@ -47,6 +47,8 @@
     <Compile Include="BaseRepo.cs" />
     <Compile Include="CategoryItemsRepo.cs" />
     <Compile Include="CategoryRepo.cs" />
+    <Compile Include="ConcertCategoryRepo.cs" />
+    <Compile Include="ConcertRepo.cs" />
     <Compile Include="ContentItemRepo.cs" />
     <Compile Include="IndexRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
