@@ -13,26 +13,17 @@
 </style>
 
 <div class="meeting-header">
-    <span>添加轮播图</span>
+    <span>添加演出</span>
 </div>
-<form id="formfile" action="/api/Index/SaveImage" method="post" enctype="multipart/form-data" name="formfile" target="submitgoods">
-    <div id="_secondSelect"></div>
+<form id="formfile" action="/api/ContentItem/SaveItems" method="post" enctype="multipart/form-data" name="formfile" target="submitgoods">
+    <div id="_c3Templete"></div>
     <div class="news-line-box">
         <div class="news-name formfile-label">
-           标题：
+            标题：
         </div>
         <div class="news-content">
             <input class="meetting-input" type="text" id="txtTitle" placeholder="请填写标题" name="title" />
             <span id="spanTitle" style="color:red"></span>
-        </div>
-    </div>
-    <div class="news-line-box">
-        <div class="news-name formfile-label">
-           类别：
-        </div>
-        <div class="news-content" id="radio">
-            首页 <input type="radio" name="imgType" value="0" />
-            演出 <input type="radio" name="imgType" value="1" />
         </div>
     </div>
     <div class="news-line-box">
@@ -63,7 +54,7 @@
     </div>
     <div class="news-line-box">
         <div class="news-name formfile-label">
-            图片链接地址：
+            链接地址：
         </div>
         <div class="news-content">
             <input class="meetting-input" type="text" id="txtLink" placeholder="请填写链接地址" name="url" />
@@ -77,18 +68,33 @@
     </div>
 </form>
 <iframe id="submitgoods" name="submitgoods" style="display:none;"></iframe>
-
+<script type="text/x-jquery-tmpl" id="c3Templete">
+        <div class="news-name formfile-label" >选择分类</div>
+    <select class="NewSelect" name="categoryItemsId" id="categoryItems">
+        {{if Data.length==0}}
+        <option value="-1">选择模块</option>
+        {{/if}}
+        {{each Data}}
+        <option value="{{$value.CategoryItemsId}}">{{$value.Title}}</option>
+        {{/each}}
+    </select>
+</script>
 <script type="text/javascript">
+    var categoryItemsId;
     //主入口
     $(function () {
+        loadCategory();
         $("#uploadfile").change(function () {
             change();
         });
         //返回上一页
         $("#btnBefore").click(function () {
-            loadpage("/html/Home/imagelist.html");
+            loadpage("/html/Articles/list.html");
         });
         $('#formfile').submit(function () {
+            if (categoryItemsId == -1) {
+                return false;
+            }
             if ($("#uploadfile").val() == "" || $("#preview").attr("src") == "/Images/no-image.jpg") {
                 $("#spanImg").text("图片不能为空");
                 return false;
@@ -109,6 +115,17 @@
             return Add();
         })
     });
+    function loadCategory() {
+        $.fspost('/api/CategoryItems/GetAllList', {
+        }).success(function (data) {
+            if (data && data.length > 0) {
+                categoryItemsId = data[0].CategoryItemsId;
+            } else {
+                categoryItemsId = -1;
+            }
+            $('#_c3Templete').html(template('c3Templete', data));
+        });
+    }
     function change() {
         var pic = document.getElementById("preview"),
             file = document.getElementById("uploadfile"),

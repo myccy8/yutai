@@ -37,6 +37,7 @@ namespace Yutai.Admin.Controllers
                             file.SaveAs(path);
                             HomeEntity home = new HomeEntity()
                             {
+                                Type = httpRequest.Form["imgType"],
                                 Content = httpRequest.Form["content"],
                                 ImagePath = "/Images/Home/" + fileName + GetExtension(file.FileName),
                                 Url = httpRequest.Form["url"],
@@ -86,6 +87,7 @@ namespace Yutai.Admin.Controllers
                         HomeEntity home = new HomeEntity()
                         {
                             Id = id,
+                            Type = httpRequest.Form["imgType"],
                             Content = httpRequest.Form["content"],
                             Url = httpRequest.Form["url"],
                             ImagePath = httpRequest.Form["imageUrl"],

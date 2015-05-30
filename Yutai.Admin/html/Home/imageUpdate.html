@@ -30,6 +30,15 @@
     </div>
     <div class="news-line-box">
         <div class="news-name formfile-label">
+            类别：
+        </div>
+        <div class="news-content" id="radio">
+            首页 <input type="radio" name="imgType" value="0" />
+            演出 <input type="radio" name="imgType" value="1" />
+        </div>
+    </div>
+    <div class="news-line-box">
+        <div class="news-name formfile-label">
             内容：
         </div>
         <div class="news-content">
@@ -157,6 +166,7 @@
                     $("#txtLink").val(data.Url);
                     $("#txtContent").val(data.Content);
                     $("#imageUrl").val(data.ImagePath);
+                    $("#radio").find('input').eq(data.Type).prop('checked', true);
                     $("#preview").attr("src", data.ImagePath);
                 }, 401: function (jqXHR, textStatus, errorThrown) {
                     window.location.href = '/html/login.html';

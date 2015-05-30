@@ -555,6 +555,9 @@
     <Content Include="html\Home\imagelist.html" />
     <Content Include="html\Home\imageUpdate.html" />
     <Content Include="html\login.html" />
+    <Content Include="html\Music\add.html" />
+    <Content Include="html\Music\list.html" />
+    <Content Include="html\Music\update.html" />
     <Content Include="html\pager.html" />
     <Content Include="Includes\bootstrap\css\bootstrap-image-gallery.min.css" />
     <Content Include="Includes\bootstrap\css\bootstrap-responsive.css" />

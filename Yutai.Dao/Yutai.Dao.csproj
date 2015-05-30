@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryItems.cs" />
+    <Compile Include="Models\Concert.cs" />
+    <Compile Include="Models\ConcertCategory.cs" />
     <Compile Include="Models\ContentItem.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

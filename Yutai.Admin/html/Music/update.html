@@ -13,26 +13,18 @@
 </style>
 
 <div class="meeting-header">
-    <span>添加轮播图</span>
+    <span>添加文章</span>
 </div>
-<form id="formfile" action="/api/Index/SaveImage" method="post" enctype="multipart/form-data" name="formfile" target="submitgoods">
-    <div id="_secondSelect"></div>
+<form id="formfile" action="/api/ContentItem/UpdateItems" method="post" enctype="multipart/form-data" name="formfile" target="submitgoods">
+    <div id="_c4Templete"></div>
+    <input id="contentitemid" name="contentitemid" type="hidden" />
     <div class="news-line-box">
         <div class="news-name formfile-label">
-           标题：
+            标题：
         </div>
         <div class="news-content">
             <input class="meetting-input" type="text" id="txtTitle" placeholder="请填写标题" name="title" />
             <span id="spanTitle" style="color:red"></span>
-        </div>
-    </div>
-    <div class="news-line-box">
-        <div class="news-name formfile-label">
-           类别：
-        </div>
-        <div class="news-content" id="radio">
-            首页 <input type="radio" name="imgType" value="0" />
-            演出 <input type="radio" name="imgType" value="1" />
         </div>
     </div>
     <div class="news-line-box">
@@ -63,7 +55,7 @@
     </div>
     <div class="news-line-box">
         <div class="news-name formfile-label">
-            图片链接地址：
+            链接地址：
         </div>
         <div class="news-content">
             <input class="meetting-input" type="text" id="txtLink" placeholder="请填写链接地址" name="url" />
@@ -71,25 +63,41 @@
         </div>
     </div>
     <div class="operate-nextBtn mt20">
-        <input type="submit" value="添加" class="saveBtn" id="btnNext" />
+        <input type="submit" value="修改" class="saveBtn" id="btnNext" />
         <!--返回上一页-->
         <input type="button" value="返回" class="saveBtn" id="btnBefore" />
     </div>
 </form>
 <iframe id="submitgoods" name="submitgoods" style="display:none;"></iframe>
-
+<script type="text/x-jquery-tmpl" id="c4Templete">
+    <div class="news-name formfile-label" >选择分类</div>
+    <select class="NewSelect" name="categoryItemsId" id="categoryItems">
+        {{if Data.length==0}}
+        <option value="-1">选择模块</option>
+        {{/if}}
+        {{each Data}}
+        <option value="{{$value.CategoryItemsId}}">{{$value.Title}}</option>
+        {{/each}}
+    </select>
+</script>
 <script type="text/javascript">
+    var categoryItemsId;
     //主入口
     $(function () {
+        loadCategory();
+        Load();
         $("#uploadfile").change(function () {
             change();
         });
         //返回上一页
         $("#btnBefore").click(function () {
-            loadpage("/html/Home/imagelist.html");
+            loadpage("/html/Articles/list.html");
         });
         $('#formfile').submit(function () {
-            if ($("#uploadfile").val() == "" || $("#preview").attr("src") == "/Images/no-image.jpg") {
+            if (categoryItemsId == -1) {
+                return false;
+            }
+            if ($("#preview").attr("src") == "/Images/no-image.jpg") {
                 $("#spanImg").text("图片不能为空");
                 return false;
             } else {
@@ -99,16 +107,19 @@
                 var val = $(top['submitgoods'].document.body).text();
                 if (val) {
                     clearInterval(a);
-                    alert("添加成功");
-                    $("#txtTitle").val("");
-                    $("#txtContent").val("");
-                    $("#txtLink").val("");
-                    $("#preview").attr("src", "/Images/no-image.jpg");
+                    alert("修改成功");
                 }
             }, 500);
             return Add();
         })
     });
+    function loadCategory() {
+        $.fspost('/api/CategoryItems/GetAllList', {
+        }).success(function (data) { 
+            $('#_c4Templete').html(template('c4Templete', data));
+            $("#categoryItems").val($.cookie('categoryItems'));
+        });
+    }
     function change() {
         var pic = document.getElementById("preview"),
             file = document.getElementById("uploadfile"),
@@ -129,6 +140,32 @@
             }
         }
     };
+    function Load() {
+        var url = $.cookie('pageurl');
+        var Id = url.split("?contentitemid=")[1];
+        $("#contentitemid").val(Id);
+        var postData = {
+            Id: Id,
+        };
+        $.ajax({
+            url: '/api/ContentItem/GetSingle',
+            type: 'POST',
+            async: false,
+            data: JSON.stringify(postData),
+            contentType: "application/json;charset=utf-8",
+            timeout: 3000,
+            statusCode: {
+                200: function (data) {
+                    $("#txtTitle").val(data.ItemTitle);//newsUpdateDate
+                    $("#txtContent").val(data.ItemDetail);
+                    $("#txtLink").val(data.Url);
+                    $("#preview").attr("src", data.ItemImage);
+                }, 401: function (jqXHR, textStatus, errorThrown) {
+                    window.location.href = '/html/login.html';
+                }
+            }
+        });
+    }
     function html5Reader(file) {
         var file = file.files[0];
         var reader = new FileReader();

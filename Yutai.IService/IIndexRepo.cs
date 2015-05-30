@@ -9,6 +9,7 @@ namespace Yutai.IService
 {
     public interface IIndexRepo
     {
+        List<HomeEntity> GetHomeImage(string typeId);
         List<HomeEntity> GetHomeImage();
         bool SaveHomeImage(HomeEntity entity);
         bool DelHomeImage(int id);

@@ -11,11 +11,20 @@ namespace Yutai.Service
 {
     public class IndexRepo :BaseRepo,IIndexRepo
     {
-        public List<HomeEntity> GetHomeImage()
+        public List<HomeEntity> GetHomeImage(string typeId)
         {
             List<HomeEntity> entityList = null; 
             Exec((db) => {
-                entityList = db.HomeEntity.ToList();           
+                entityList = db.HomeEntity.Where(x=>x.Type==typeId).ToList();           
+            });
+            return entityList;
+        }
+        public List<HomeEntity> GetHomeImage()
+        {
+            List<HomeEntity> entityList = null;
+            Exec((db) =>
+            {
+                entityList = db.HomeEntity.ToList();
             });
             return entityList;
         }
