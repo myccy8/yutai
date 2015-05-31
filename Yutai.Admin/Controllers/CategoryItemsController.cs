@@ -62,6 +62,7 @@ namespace Yutai.Admin.Controllers
                 return new
                 {
                     Title = item.Title,
+                    SecondTitle=item.SecondTitle,
                     Content = item.Content,
                     CategoryImage = item.CategoryImage,
                     ContentImage = item.ContentImage,
@@ -103,6 +104,7 @@ namespace Yutai.Admin.Controllers
                                 CategoryImage = "/Images/CategoryItems/" + fileName1 + GetExtension(file1.FileName),
                                 ContentImage = "/Images/CategoryItems/" + fileName2 + GetExtension(file2.FileName),
                                 Title = httpRequest.Form["title"],
+                                SecondTitle = httpRequest.Form["title2"],
                                 Content = httpRequest.Form["content"]
                             };
                             return base.getResponse(categoryItemsRepo.SaveCategoryItems(items));
@@ -139,6 +141,7 @@ namespace Yutai.Admin.Controllers
                             CategoryItemsId = Convert.ToInt32(httpRequest.Form["categoryitemsid"]),
                             CategoryId = Convert.ToInt32(httpRequest.Form["category"]),
                             Title = httpRequest.Form["title"],
+                            SecondTitle = httpRequest.Form["title2"],
                             Content = httpRequest.Form["content"]
                         };
                         if (!string.IsNullOrWhiteSpace(file1.FileName))

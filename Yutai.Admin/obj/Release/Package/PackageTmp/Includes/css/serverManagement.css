@@ -1,0 +1,737 @@
+.menuSearch{
+	padding:7px 14px;
+	text-align:left;
+	padding:0;
+	margin:0;
+}
+.deviceTable{
+	width:100%;
+}
+.deviceTable tr{
+	border:1px solid #ddd;
+	border-right:0;
+	border-left:0;
+}
+.deviceTable tr td,.deviceTable tr th{
+	text-align:left;
+}
+.deviceTable tr th{
+	height:48px;
+	line-height:48px;
+}
+.deviceTable tr td{
+	height:36px;
+	line-height:36px;
+}
+.searchServer{
+	height:30px;
+	/*line-height:30px;
+    -webkit-line-height:26px !important;*/
+	line-height:20px\9;
+    margin-left:10px;
+}
+.devicetTitle{
+	background:#eaf2f5;
+}
+.deviceIcon{
+	background:#f3f3f3;
+	height:48px;
+	line-height:48px;
+}
+.devicePage{
+	background:#f3f3f3;
+}
+.deviceHead,.deviceNum{
+	padding-left:1%;
+}
+.powerHead,.power{
+	padding-right:1%;
+}
+
+.deviceSeltct{
+	width:114px;
+	margin:0 10px 0 0;
+}
+.deviceInput{
+	margin:0 !important;
+	width:154px;
+}
+.pageBorder{
+	border:1px solid #dfdfdf;
+	background:#fff;
+	padding:5px;
+    margin-right:5px;
+}
+.current{
+	background:#f5f5f5;
+}
+[class^="judg-"], [class*=" judg-"] {
+    background:url("../img/yOs.png") no-repeat;
+    display:inline-block;
+    width:74px;
+    height:26px;
+    line-height:26px;
+            
+}
+.judg-yIcon{
+	background-position:-77px 0;
+    vertical-align:middle;
+}
+.judg-wIcon{
+	background-position:0 0;
+    vertical-align:middle;
+}
+.addGoods{
+	border:8px solid #6b6b6b;
+	float:left;
+	width:250px;
+	height:auto;
+	position:absolute;
+	padding:10px;
+	right:100px;
+	top:50px;
+	background:#fff;
+}
+.userTitle{
+	color:#333;
+	font-size:16px;
+	width:100%;
+	text-align:center;
+	padding:5px 0 0px;
+    font-weight:900;
+}
+.userClose{
+	position:absolute;
+	top:5px;
+	right:5px;
+}
+.userRange{
+	float:left;
+	display:inline-block;
+    margin: 2px 0 0 10px;
+    display:inline;
+}
+.userYS{
+	float:left;
+	display:inline-block;
+	text-align:right;
+    margin-left: 5px;
+}
+.userButton{
+	width:100%;
+	float:left;
+	text-align:center;
+}
+.userButton img{
+	margin:2%;
+}
+.userLine{
+	border:1px solid #cecccd;
+	float:left;
+	width:92%;
+	padding:2%;
+	margin:2%;
+    overflow-y:scroll;
+    height:500px;
+}
+/*.userLineOperate{
+	float:left;
+	width:92%;
+	padding:2%;
+	margin:2%;
+    height:auto;
+}*/
+.userLineState{
+	float:left;
+	width:92%;
+	padding:2%;
+	margin:5% 2% 2%;
+}
+.accountYS{
+	padding-right:10px;
+	margin:0 10px 0 0 !important;
+}
+.userAccount span{
+	margin-right:35px;
+}
+.deviceTable tr td.noteEdit,.deviceTable tr th.noteEdit{
+	/*text-align:right;*/
+	padding-right:1%;
+}
+.canUse{
+	color:#5ca142;
+}
+.canNoUse{
+	color:#ff5b30;
+}
+.alreadyDelete{
+	color:#ff0000;
+    margin-left:5px;
+}
+.alwaysDelete{
+	color:#c2c2c2;
+}
+.ifChoose span{
+	display:inline-block;
+	width:90px;
+	float:left;
+}
+.ifChoose span input{
+	margin-right:10px;
+}
+.rightTxt{
+	text-align:right !important;
+}
+.adminRange{
+	display:inline-block; 
+	margin-right:45px;
+}
+.rolePostion {
+    display:inline-block;
+    padding:4px 0 4px 5px;
+}
+.pageTable {
+    width:100%;
+    height:40px;
+    line-height:40px;
+}
+.permissionTitle {
+    border-bottom:1px dashed #ddd;
+    padding-bottom:10px;
+    margin:5px 0;
+    font-weight:900;
+}
+input.searchPage {
+    height: 17px;
+    line-height: 20px;
+    margin-top: 7px;
+    width:30px;
+}
+.pagePositon {
+    margin-right:10px;
+    display:inline-block;
+}
+.goNow {
+    color:#0088CC;
+    margin:0 5px;
+}
+#lblerror {
+    color:#ff0000;
+    /*padding-left:10px;*/
+}
+.hrManagement{margin:0 auto;}
+.hrTop{width:100%; float:left;} 
+ul,li{padding:0; margin:0; list-style:none;}
+.hrTop ul li{width:10%; float:left; height:34px; line-height:34px; text-align:center; border-radius:5px 5px 0 0; cursor:pointer;}
+.hrSelect{ background:#F3F4F6; margin-bottom:-1px; border:1px solid #cbced0; border-bottom:0; position:relative; z-index:100;}
+.hrBottom{width:100%;background:#f3f4f6; float:left; border:1px solid #cbced0; padding:60px 0; height:380px;}
+.hrLine{width:100%; float:left; padding:15px 44px; color:#777;}
+.hrLineuser{width:40%; float:left; padding:15px 44px; color:#777;}
+.hrPosition{width:450px; float:left; font-size:14px; height:30px; line-height:30px;}
+.hrTitle{width:110px; display:inline-block; color:#333; font-size:14px; font-weight:900;}
+.deviceTable tr td.imgEdit {
+    padding-left:7px; 
+    text-align:left !important;
+}
+.addEdit {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 8px solid #6B6B6B;
+    float: left;
+    height: auto;
+    padding: 10px;
+    position: absolute;
+    left:35%;
+    top:150px;
+    width: 530px;
+}
+.stateLine {
+    width:50%;
+    float:left;
+}
+.stateName {
+    float:left;
+    width:60px;
+    height:30px;
+    line-height:30px;
+}
+.stateAnswer {
+    float:left;
+    width:145px;
+}
+.stateLineVerti {
+    float: left;
+    margin: 10px 0;
+    width: 45%;
+    margin-right:5%;
+}
+.saveBtn {
+    background:url(../img/sureNb.png) no-repeat;
+    width:71px !important;
+    height:30px;
+    border:0;
+    color:#fff;
+    float:left;
+    margin-top:20px;
+}
+.addBtn {
+    background:url(../img/sureNb.png) no-repeat;
+    width:71px !important;
+    height:30px;
+    border:0;
+    color:#fff;
+}
+.backBtn {
+    /*background:url(../img/cancelNb.png) no-repeat;
+    width:48px !important;
+    height:30px;
+    border:0;
+    color:#000;
+    margin-left:10px;*/
+
+    display: block; 
+    float:left; 
+    text-align: center; 
+    width:72px !important; 
+    height:30px; 
+    line-height:30px; 
+    background:url(../img/backPre.png) no-repeat; 
+    border:0;
+    margin-left:20px;
+    margin-top:20px;
+}
+#divBasicSave {
+    margin-left:42px;
+    width:165px;
+}
+#uploadSave{
+    margin-left:42px;
+    width:163px;
+}
+.editBtn {
+    background: url("../img/backPre.png") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    width:72px !important;
+    float:left; 
+    margin-top:20px;
+}
+.backPre{
+    display: block; 
+    float:left; 
+    text-align: center; 
+    width:72px !important; 
+    height:30px; 
+    line-height:30px; 
+    background:url(../img/backPre.png) no-repeat; 
+    border:0;
+    margin-left:20px;
+    margin-top:20px;
+}
+#divbasicShow .lineBtn {
+    float: left;
+    margin-left:42px;
+    width: 100%;
+}
+.madeIn {
+    float: right;
+    margin: 20px 32px 20px 0;
+    text-align: right;
+    width: 96%;
+}
+.tableBtn {
+    position:absolute;
+}
+.deviceIconTitle {
+    height: 48px;
+    line-height: 48px;
+    font-size:14px;
+}
+.deviceSeltctOption {
+    margin:10px 0 10px 10px;
+    width: 214px;
+}
+.headPosition {
+    margin:22px 0 0 44px;
+    display:table-cell;
+}
+.icon-Person {
+    background-position: 0 0;
+    padding-left: 5px;
+}
+.parentDep {
+    position:relative;
+}
+.sr_shop {
+    position:absolute;
+    left:10px;
+    top:-6px;
+    *top:10px;
+    width:170px !important;
+}
+#divBasicShow {
+    float:left;
+    width:45%;
+}
+#divBasicEdit{
+    float:left;
+    width:45%;
+    position:relative;
+}
+.lineBtn {
+    clear:both;
+    margin-left:42px;
+}
+.hrPosition input {
+    margin-bottom:0;
+    padding:0 5px;
+    height:30px;
+    line-height:30px;
+}
+.hrLineLerror {
+    bottom: 72px;
+    color: #777777;
+    float: left;
+    left: 40%;
+    padding: 15px 44px;
+    position: absolute;
+}
+#divPersonOne {
+    float: left;
+    width: 10%;
+    margin-top:22px;
+}
+#divPersonTwo {
+    float: left;
+    width: 30%;
+}
+#divPersonThree {
+    float: left;
+    width: 50%;
+}
+.photo
+{
+    border:1px solid #a3a4a7;
+    background:#fff;
+    float:left; 
+    padding:5px; 
+    position:relative;
+    margin-left:20px;
+}
+.chagngeImage
+{
+    position:absolute; 
+    bottom:5px; 
+    color:#fff; 
+    background:#000; 
+    opacity:0.6; 
+    width:83px; 
+    height:25px; 
+    line-height:25px; 
+    text-align:center; 
+    font-size:14px;
+    cursor:pointer;
+}
+.lineBtnEdit {
+    clear: both;
+    float: left;
+    margin-left: 42px;
+}
+#headimgFile {
+    border: 0 none;
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+.upBtn{width:400px;
+        float:left; 
+        margin:0 0 20px 299px;
+}
+.upLoad{width:70%; float:left;}
+.lookLoad{width:30%; float:left;}
+.upLoad{width:50%; float:left;}
+.lookLoad{width:50%; float:left;}
+.upOdown{margin-top:27px; text-align:center;}
+.upOdown input{margin-right:20px;}
+.viewPhoto{border:1px solid #a3a4a7; background:#fff;}
+.viewFont{color:#646464;font-size:14px; text-align:center;}
+
+.fileForm {
+    width:100%;
+    text-align:center;
+    float:left;
+}
+.previewImg {
+    width:320px;
+    height:320px;
+    margin-left:300px;
+    text-align:left;
+    float:left;
+}
+#spanimgerror {
+    color:#f00;
+    float: left;
+    line-height: 30px;
+}
+#preview-container {
+    height:80px;
+    width:92px
+}
+#btnUpload {
+    background: url("../img/sureNb.png") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    width:72px;
+    color:#fff;
+    /*margin-top: -10px;*/
+    text-align:center;
+}
+.uploadFileBtn {
+    margin-top: -10px;
+}
+#bthNoUpload {
+    background: url("../img/backPre.png") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    width:72px;
+}
+.searchPerson {
+    padding: 5px 15px;
+    text-align: center;
+    margin-top: -10px;
+    border-radius: 3px;
+    border: none;
+    background-color: #f40;
+    color: #fff;
+    margin-left: 10px;
+}
+.commonuserdiv {
+    width: 264px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    height:300px;
+    overflow:auto;
+}
+.commonuser {
+    border-bottom: 1px dashed #ccc;
+    width: 264px;
+    margin-bottom: 13px;
+}
+.commonuser th,.commonuser td {
+    text-align: left;
+    padding: 6px 0;
+}
+.commonuserbtn {
+    margin-bottom: 8px;
+}
+.makesure {
+    padding: 5px 15px;
+    text-align: center;
+    border-radius: 3px;
+    border: none;
+    background-color: #3993ba;
+    color: #fff;
+}
+.selectPerson {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    float: left;
+    width: 100%;
+}
+.selectPerson .divuser {
+    float: left;
+    margin-right: 17px;
+    margin-bottom: 10px;
+}
+.selectPerson .userdelete {
+    margin-left: 6px;
+    background: url("../img/delete-user.png") no-repeat;
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+.selectPerson .selectPersonSpan {
+    float: left;
+    font-size: 14px;
+    line-height: 15px;
+}
+.selectPersonBox {
+    width: 300px;
+}
+.previeweBtn input {
+    margin-right:20px;
+}
+.previeweBtn {
+    margin:20px 0 0 300px;
+    float:left;
+}
+.leftView {
+    float:left;
+    width:600px;
+}
+.rightView {
+    float:left;
+    /*position:absolute;
+    right:200px;*/
+    text-align:left;
+    margin-left:58px;
+}
+#headImg {
+    max-height:320px;
+    max-width:320px;
+}
+.lookImg {
+    width:92px;
+    height:92px;
+    left:660px;
+    overflow:hidden;
+    position:absolute;
+    top:110px;
+}
+#headImgPrev {
+   /* max-width:92px;
+    max-height:92px;*/
+   border:0;
+}
+.seeImg {
+    color:#646464;
+    font-size:14px;
+    width:92px;
+    line-height:30px;
+}
+
+.imgfilter {
+ filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+/*width:320px;
+height:320px;*/
+}
+#headImg {
+    width:320px !important;
+    height:320px !important;
+}
+
+.meeting-header {
+    background-color: #F3F3F3;
+    height: 48px;
+    line-height: 48px;
+    font-size:13px;
+    font-weight:bold;
+    padding-left: 1%;
+    margin-bottom: 20px
+}
+.meeting-line-box {
+    float: left;
+    margin: 10px 1% 0;
+    width: 48%;
+}
+.meetting-input {
+    width:232px;
+}
+.meeting-content select {
+    width:66px;
+}
+.meetting-time-input {
+    width:69px;
+    margin-right: 15px;
+}
+.meeting-name {
+    font-weight:bold;
+    margin-bottom:10px;
+}
+.risk {
+    font-weight:bold;
+}
+.operate-nextBtn {
+    padding:0 1%;
+}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 44% !important;
+}
+.meetting-name {
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+.meetting-name-span {
+    color: #067EAD;
+    float: none;
+    margin-left: 10px;
+}
+.operate-list-bottom {
+    float: left;
+    margin-top: 30px;
+    width: 93%;
+}
+.meetting-left,.meetting-right {
+    float: left;
+    margin: 10px 1% 0;
+    width: 48%;
+}
+.meeting-line {
+    margin: 10px 0 0;
+}
+.meetting-textarea {
+    height: 177px;
+    overflow: auto;
+    width: 232px;
+}
+.uploadify-button {
+    background-color: #FFFFFF !important;
+    background-image: -moz-linear-gradient(center bottom , #FFFFFF 0%, #FFFFFF 100%) !important;
+    background-image: linear-gradient(bottom, #FFFFFF 0%, #FFFFFF 100%) !important;
+	background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #FFFFFF 100%) !important;
+	background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #FFFFFF 100%) !important;
+	background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #FFFFFF 100%) !important;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, #FFFFFF),
+		color-stop(1, #FFFFFF)
+	) !important;
+    background-position: center top;
+    background-repeat: no-repeat;
+    border: 1px solid #CCCCCC !important;
+    border-radius: 30px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset !important;
+    color: #FFFFFF;
+    font: bold 12px Arial,Helvetica,sans-serif;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    width: 228px !important;
+    color: #000000 !important;
+}
+.uploadify-button:hover {
+    background-color: #f8f8f8 !important;
+    background-image: -moz-linear-gradient(center bottom , #f9f9f9 0%, #fffbfb 100%) !important;
+}
+.topicedit {
+    background: url("../img/note.png") no-repeat scroll 0 0;
+    text-indent: -9999px;
+    width: 30px !important;
+    border:none;
+}
+.topicdelete {
+    background: url("../img/delete.png") no-repeat scroll 0 0;
+    text-indent: -9999px;
+    width: 30px !important;
+    border:none;
+}
+.meetingdelete {
+    margin-left:10px;
+}
+.btnAddEnter {
+    margin-bottom:20px;
+    float:left;
+}
+.higherAdd {
+    margin-left:10px;
+}

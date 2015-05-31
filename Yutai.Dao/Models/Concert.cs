@@ -14,11 +14,11 @@ namespace Yutai.Dao.Models
         public string CategoryImage { get; set; }
         public string ContentImage { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
         public string Time { get; set; }
         public string Price { get; set; }
         public string Detail { get; set; }
         public string Lat { get; set; }
+        public string Address { get; set; }
         public string Lng { get; set; }
         public int Like { get; set; }
         public int Hate{ get; set; }

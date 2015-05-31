@@ -72,6 +72,7 @@ namespace Yutai.Service
                 {
                     updateEntity.Content = entity.Content;
                     updateEntity.Title = entity.Title;
+                    updateEntity.SecondTitle = entity.SecondTitle;
                     updateEntity.CategoryId = entity.CategoryId;
                     if (!string.IsNullOrWhiteSpace(entity.CategoryImage))
                     {

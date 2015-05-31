@@ -26,7 +26,15 @@ namespace Yutai.Service
             int _total = 0;
             Exec((db) =>
             {
-                var list = db.Concert.Where(x => x.ConcertCategoryId == categoryId).ToList();
+                List<Concert> list = new List<Concert>();
+                if (categoryId == -1)
+                {
+                    list = db.Concert.ToList();
+                }
+                else
+                {
+                    list = db.Concert.Where(x => x.ConcertCategoryId == categoryId).ToList();
+                }
                 if (pageSize == 0)
                 {
                     entityList = list;
@@ -70,7 +78,6 @@ namespace Yutai.Service
                 if (updateEntity != null)
                 {
                     updateEntity.ConcertCategoryId = entity.ConcertCategoryId;
-                    updateEntity.Content = entity.Content;
                     updateEntity.Detail = entity.Detail;
                     updateEntity.Lat = entity.Lat;
                     updateEntity.Lng = entity.Lng;
@@ -100,25 +107,29 @@ namespace Yutai.Service
         }
 
 
-        public bool SetStatus(int type, int id)
+        public List<int> SetStatus(int type, int id)
         {
-            return Exec((db) =>
-            {
-                var updateEntity = db.Concert.SingleOrDefault(x => x.ConcertId == id);
-                if (updateEntity != null)
-                {
-                    if (type == 0)
-                    {
-                        updateEntity.Like++;
-                    }
-                    else if (type == 1)
-                    {
-                        updateEntity.Hate++;
-                    }
-                }
-            }, true);
+            List<int> d = new List<int>();
+            Exec((db) =>
+           {
+               var updateEntity = db.Concert.SingleOrDefault(x => x.ConcertId == id);
+               if (updateEntity != null)
+               {
+                   if (type == 0)
+                   {
+                       updateEntity.Like++;
+                   }
+                   else if (type == 1)
+                   {
+                       updateEntity.Hate++;
+                   }
+                   d.Add(updateEntity.Like);
+                   d.Add(updateEntity.Hate);
+               }
+           }, true);
+            return d;
         }
 
     }
-    }
+}
 

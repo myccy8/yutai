@@ -1,0 +1,121 @@
+﻿<div class="row-fluid" id="contentwrapper">
+    <table class="deviceTable" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr style="border:0px" id="_cTemplete4"></tr>
+            <tr class="devicetTitle">
+                <!--<th class="userAccount" width="25%">ID</th>-->
+                <th class="deviceNum" width="5%">图片</th>
+                <th class="userAccount">标题</th>
+                <th class="userAccount">喜欢人数</th>
+                <th class="userAccount">不喜欢人数</th>
+                <th class="power" width="20%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="_CategoryItems4"></tbody>
+    </table>
+    <div class="mt20">
+        <input type="button" class="saveBtn" id="btnAdd" value="添加" />
+    </div>
+</div>
+<script type="text/x-jquery-tmpl" id="CategoryItems4">
+    {{each Data}}
+    <tr class="deviceContent canclick">
+        <td class="deviceContent notice" concertid="{{$value.ConcertId}}">
+            <a class="cbox_single thumbnail cboxElement">
+                <img alt="" src="{{$value.CategoryImage}}" style="height:70px;width:80px">
+            </a>
+        </td>
+        <td class="deviceContent notice deviceNum " width="20%" concertid="{{$value.ConcertId}}">{{$value.Title}}</td>
+        <td class="deviceContent notice deviceNum " width="20%" concertid="{{$value.ConcertId}}">{{$value.Like}}</td>
+        <td class="deviceContent notice deviceNum " width="20%" concertid="{{$value.ConcertId}}">{{$value.Hate}}</td>
+        <td width="20%">
+            <input type="button" value="编辑" class="editorRole" concertid="{{$value.ConcertId}}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="删除" class="deleteRole" concertid="{{$value.ConcertId}}" />
+        </td>
+    </tr>
+    {{/each}}
+    <div id="pagediv"></div>
+</script>
+<script type="text/x-jquery-tmpl" id="cTemplete4">
+    <th>
+        <div class="news-name formfile-label" style=" margin-bottom: -10px; ">选择分类</div>
+        <select class="NewSelect" name="category" id="category" onchange="selectCategoryId()">
+            {{if Data.length==0}}
+            <option value="-1">选择分类</option>
+            {{/if}}
+            {{each Data}}
+            <option value="{{$value.CategoryId}}">{{$value.Name}}</option>
+            {{/each}}
+        </select>
+    </th>
+</script>
+<script type="text/javascript">
+    var categoryId;
+    $(function () {
+        loadCategory();
+        $("#btnAdd").click(function () {
+            loadpage("/html/Music/add.html");
+        });
+    });
+    function loadlist() {
+        $.fspost('/api/Music/GetList', {
+            PageIndex: $.cookie('pageindex'),// $.cookie('pageindex')
+            PageSize: $.PageSize,
+            Id: categoryId
+        }).success(function (data) {
+            $('#_CategoryItems4').html(template('CategoryItems4', data));
+            BindClickBtn();
+        });
+    }
+    function selectCategoryId() {
+        categoryId = $('#category').val();
+        if (categoryId != -1) {
+            loadlist();
+        }
+    }
+    function loadCategory() {
+        $.fspost('/api/MusicCategory/GetList', {
+        }).success(function (data) {
+            if (data && data.length > 0) {
+                categoryId = data[0].CategoryId;
+                loadlist();
+            } else {
+                categoryId = -1;
+            }
+            var re = { Data: data };
+            $('#_cTemplete4').html(template('cTemplete4', re));
+        });
+    }
+    //绑定ClickBtn事件
+    function BindClickBtn() {
+
+        $(".editorRole").click(function () {
+            var pageUrl = "/html/Music/update.html?concertid=" + $(this).attr("concertid");
+            $.cookie('pageurl', pageUrl);
+            $.cookie('updateSelect', $("#category").val());
+            loadpage(pageUrl);
+        });
+        $(".deleteRole").click(function () {
+            var that = $(this);
+            var request = {
+                Id: $(this).attr("concertid")
+            }
+            if (confirm("确定要删除?")) {
+                $.ajax({
+                    url: '/api/Music/Delete',
+                    type: 'Post',
+                    data: JSON.stringify(request),
+                    contentType: "application/json;charset=utf-8",
+                    statusCode: {
+                        200: function (data) {
+                            that.parent().parent().remove();
+                        }, 401: function (jqXHR, textStatus, errorThrown) {
+                            window.location.href = '/html/login.html';
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>

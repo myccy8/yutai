@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\lindongdong\Desktop\a</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Autofac.dll">
+      <publishTime>05/19/2015 21:10:26</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.Owin.dll">
+      <publishTime>05/19/2015 21:10:26</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.dll">
+      <publishTime>05/19/2015 21:12:32</publishTime>
+    </File>
+    <File Include="bin/Autofac.Integration.WebApi.Owin.dll">
+      <publishTime>05/19/2015 21:12:33</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>05/23/2015 12:06:39</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>05/23/2015 12:06:39</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Cors.dll">
+      <publishTime>05/23/2015 16:54:40</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>05/19/2015 21:09:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>05/19/2015 21:09:22</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>05/19/2015 21:07:42</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>05/19/2015 21:07:42</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>05/19/2015 21:07:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Cors.dll">
+      <publishTime>05/23/2015 16:54:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>05/19/2015 21:07:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Owin.dll">
+      <publishTime>05/19/2015 21:07:42</publishTime>
+    </File>
+    <File Include="bin/Yutai.Dao.dll">
+      <publishTime>05/31/2015 12:46:18</publishTime>
+    </File>
+    <File Include="bin/yutai.dll">
+      <publishTime>05/31/2015 12:46:19</publishTime>
+    </File>
+    <File Include="bin/Yutai.IService.dll">
+      <publishTime>05/31/2015 12:46:18</publishTime>
+    </File>
+    <File Include="bin/Yutai.Service.dll">
+      <publishTime>05/31/2015 12:46:18</publishTime>
+    </File>
+    <File Include="Controllers/packages.config">
+      <publishTime>05/19/2015 23:17:24</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>05/23/2015 20:13:50</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/31/2015 11:46:36</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

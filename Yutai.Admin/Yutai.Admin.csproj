@@ -1802,6 +1802,7 @@
     <Content Include="ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="ckeditor\samples\sample_posteddata.php" />
     <Content Include="ckeditor\skins\moono\readme.md" />
+    <None Include="Properties\PublishProfiles\B.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -1,0 +1,117 @@
+﻿ <table id="pager" class="pageTable" style="width:100%;">
+     <tr id="pagecontent"  class="devicePage">
+<!--         <td colspan="3">Showing 1 to 10 of 29 entries</td>
+         <td>
+             <span class="pageBorder"><a href="#">&#60;shang</a></span>
+             <span class="pageBorde r current"><a href="#">1</a></span>
+             <span class="pageBorder"><a href="#">2</a></span>
+             <span class="pageBorder"><a href="#">3</a></span>
+             <span class="pageBorder"><a href="#">Next &#62;</a></span>
+         </td>-->
+     </tr>
+
+ </table>
+<script type="text/javascript">
+    $(function () {
+        var total = $.cookie('total');
+
+        var pageindex = $.cookie('pageindex');
+        var pagesize = setting.PageSize;
+        var pagecount = Math.ceil(total / pagesize);
+        //console.log(pageindex);
+        var html = '';
+        if (pageindex >= 0 && pageindex < pagecount && pagecount > 1) {
+            //console.log('pageindex');
+            html += '<td class="deviceNum">' + ' 从 ' + (pageindex * pagesize + 1) + ' &nbsp;' + '到' + ' &nbsp;' + ((pageindex * pagesize + pagesize) < total ? pageindex * pagesize + pagesize : total) + ' 总 ' + total + '</td>';
+
+            html += '<td colspan="2" class="rightTxt noteEdit">';
+            if (pageindex > 0) {
+                html += '<span class="pageBorder" pageindex=' + (parseInt(pageindex) - 1) + '><a href="javascript:void(0)">&#60; 上一页</a></span>';
+            }
+            var nextlength = pagecount - pageindex - 1;
+            var nearlength = Math.floor(setting.PageItemCount / 2);
+            // console.log(nearlength);
+            if (pagecount <= setting.PageItemCount) {
+                //console.log("1");
+                for (var i = 0; i < pagecount; i++) {
+                    if (i == pageindex) {
+                        html += '<span class="pageBorder current" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    } else {
+
+                        html += '<span class="pageBorder" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    }
+                }
+            }
+            else if (pageindex <= nearlength) {
+                //console.log("2");
+                for (var i = 0; i < setting.PageItemCount; i++) {
+                    if (i == pageindex) {
+                        html += '<span class="pageBorder current" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    } else {
+
+                        html += '<span class="pageBorder" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    }
+                }
+            }
+            else if (parseInt(pageindex) + parseInt(nearlength) >= pagecount - 1) {//防止字符串拼接
+                for (var i = pagecount - setting.PageItemCount; i < pagecount; i++) {
+                    if (i == pageindex) {
+                        html += '<span class="pageBorder current" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    } else {
+                        html += '<span class="pageBorder" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    }
+                }
+            } else {
+                //  console.log("4");
+                for (var i = pageindex - nearlength; i < pageindex - nearlength + setting.PageItemCount; i++) {
+                    if (i == pageindex) {
+                        html += '<span class="pageBorder current" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    } else {
+                        html += '<span class="pageBorder" pageindex=' + i + '><a href="javascript:void(0)">' + (i + 1) + '</a></span>';
+                    }
+                }
+            }
+            if (parseInt(pageindex) + 1 < pagecount) {
+                html += '<span class="pageBorder" pageindex=' + (parseInt(pageindex) + 1) + '><a href="javascript:void(0)">下一页 &#62;</a></span>';
+            }
+            html += '<span class="pagePositon"><input name="搜索" value="" id="searchPage" class="searchPage" type="text" /><a href="javascript:void(0)" class="goNow">GO</a></span>';
+            html += '</td>';
+            //  console.log(html);
+            $('#pagecontent').html(html);
+            $('#pager').show();
+
+            $('.pageBorder').click(function () {
+                var pageindex = $(this).attr('pageindex');
+                $.cookie('pageindex', pageindex);
+                if (pageindexchanged) {
+                    pageindexchanged.apply();
+                }
+            });
+            $('.goNow').click(function () {
+                var pageindex = $("#searchPage").val();
+                if (pageindex == "") {
+                    $("#searchPage").css("borderColor", "red");
+                    return false;
+                }
+                var pattern = /^[1-9]\d*$/; //匹配正整数
+                if (!pattern.test(pageindex)) {
+                    $("#searchPage").css("borderColor", "red");
+                    return false;
+                }
+                if (pageindex > pagecount) {
+                    $("#searchPage").css("borderColor", "red");
+                    return false;
+                }
+                $.cookie('pageindex', (pageindex - 1));
+                if (pageindexchanged) {
+                    pageindexchanged.apply();
+                }
+            });
+        }
+
+
+
+    })
+
+</script>  
+

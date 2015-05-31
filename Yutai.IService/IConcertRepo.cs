@@ -15,6 +15,6 @@ namespace Yutai.IService
         bool Del(int id);
         bool Update(Concert entity);
         Concert GetSingle(int id);
-        bool SetStatus(int type,int id);
+        List<int> SetStatus(int type,int id);
     }
 }

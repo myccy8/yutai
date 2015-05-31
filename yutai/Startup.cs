@@ -34,6 +34,8 @@ namespace yutai
             builder.RegisterType<CategoryRepo>().As<ICategoryRepo>();
             builder.RegisterType<CategoryItemsRepo>().As<ICategoryItemsRepo>();
             builder.RegisterType<ContentItemRepo>().As<IContentItemRepo>();
+            builder.RegisterType<ConcertCategoryRepo>().As<IConcertCategoryRepo>();
+            builder.RegisterType<ConcertRepo>().As<IConcertRepo>();
             return builder.Build();
         }
     }

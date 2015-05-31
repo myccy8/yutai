@@ -1,0 +1,9 @@
+E:\shanghai\yutai\Yutai.IService\bin\Release\Yutai.IService.dll
+E:\shanghai\yutai\Yutai.IService\bin\Release\Yutai.IService.pdb
+E:\shanghai\yutai\Yutai.IService\bin\Release\Yutai.Dao.dll
+E:\shanghai\yutai\Yutai.IService\bin\Release\EntityFramework.dll
+E:\shanghai\yutai\Yutai.IService\bin\Release\Yutai.Dao.pdb
+E:\shanghai\yutai\Yutai.IService\bin\Release\EntityFramework.xml
+E:\shanghai\yutai\Yutai.IService\obj\Release\Yutai.IService.csprojResolveAssemblyReference.cache
+E:\shanghai\yutai\Yutai.IService\obj\Release\Yutai.IService.dll
+E:\shanghai\yutai\Yutai.IService\obj\Release\Yutai.IService.pdb

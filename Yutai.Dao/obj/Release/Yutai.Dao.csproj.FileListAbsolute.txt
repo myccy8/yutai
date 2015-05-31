@@ -1,0 +1,10 @@
+E:\shanghai\yutai\Yutai.Dao\bin\Release\Yutai.Dao.dll.config
+E:\shanghai\yutai\Yutai.Dao\bin\Release\Yutai.Dao.dll
+E:\shanghai\yutai\Yutai.Dao\bin\Release\Yutai.Dao.pdb
+E:\shanghai\yutai\Yutai.Dao\bin\Release\EntityFramework.dll
+E:\shanghai\yutai\Yutai.Dao\bin\Release\EntityFramework.SqlServer.dll
+E:\shanghai\yutai\Yutai.Dao\bin\Release\EntityFramework.xml
+E:\shanghai\yutai\Yutai.Dao\bin\Release\EntityFramework.SqlServer.xml
+E:\shanghai\yutai\Yutai.Dao\obj\Release\Yutai.Dao.csprojResolveAssemblyReference.cache
+E:\shanghai\yutai\Yutai.Dao\obj\Release\Yutai.Dao.dll
+E:\shanghai\yutai\Yutai.Dao\obj\Release\Yutai.Dao.pdb

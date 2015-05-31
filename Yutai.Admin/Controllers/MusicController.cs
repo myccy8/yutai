@@ -45,7 +45,6 @@ namespace Yutai.Admin.Controllers
                 return new
                 {
                     Title = item.Title,
-                    Content = item.Content,
                     CategoryImage = item.CategoryImage,
                     ContentImage = item.ContentImage,
                     ConcertCategoryId = item.ConcertCategoryId,
@@ -91,8 +90,8 @@ namespace Yutai.Admin.Controllers
                                 CategoryImage = "/Images/Concert/" + fileName1 + GetExtension(file1.FileName),
                                 ContentImage = "/Images/Concert/" + fileName2 + GetExtension(file2.FileName),
                                 Title = httpRequest.Form["title"],
-                                Content = httpRequest.Form["content"],
                                 Lat = httpRequest.Form["lat"],
+                                Address = httpRequest.Form["address"],
                                 Lng = httpRequest.Form["lng"],
                                 Time = httpRequest.Form["time"],
                                 Detail = httpRequest.Form["detail"],
@@ -132,8 +131,8 @@ namespace Yutai.Admin.Controllers
                             ConcertId = Convert.ToInt32(httpRequest.Form["concertId"]),
                             ConcertCategoryId = Convert.ToInt32(httpRequest.Form["categoryId"]),
                             Title = httpRequest.Form["title"],
-                            Content = httpRequest.Form["content"],
                             Lat = httpRequest.Form["lat"],
+                            Address = httpRequest.Form["address"],
                             Lng = httpRequest.Form["lng"],
                             Time = httpRequest.Form["time"],
                             Detail = httpRequest.Form["detail"],
